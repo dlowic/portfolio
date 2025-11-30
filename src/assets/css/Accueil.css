@@ -1,0 +1,157 @@
+/* src/assets/css/Accueil.css */
+
+.accueil-container {
+  max-width: 1000px;
+  margin: 60px auto; /* Centre le conteneur et donne de l'espace */
+  padding: 0 20px;
+  text-align: center; /* Centre le texte par défaut */
+}
+
+.hero-section {
+  display: flex;
+  flex-direction: row; /* Texte à gauche, image à droite */
+  align-items: center; /* Centre verticalement */
+  justify-content: center; /* Centre horizontalement si pas assez large */
+  gap: 60px; /* Espacement entre le texte et l'image */
+
+  /* Ajoute un léger fond pour les modes sombres, ou reste transparent pour le mode clair */
+  background-color: var(--couleur-fond-composant);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Ombre subtile */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-text {
+  flex: 1; /* Prend l'espace restant */
+  text-align: left; /* Aligne le texte à gauche */
+}
+
+.hero-text h1 {
+  font-size: 3.5rem; /* Grande taille pour le nom */
+  margin-bottom: 10px;
+  color: var(--couleur-accent); /* Utilise ta couleur d'accent */
+}
+
+.hero-text h2 {
+  font-size: 2rem; /* Taille moyenne pour le titre */
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: var(--couleur-texte-principal); /* Texte principal */
+}
+
+.hero-text p {
+  font-size: 1.15rem; /* Texte de paragraphe confortable */
+  line-height: 1.8;
+  color: var(--couleur-texte-principal);
+  margin-bottom: 40px;
+}
+
+.hero-image {
+  flex-shrink: 0; /* Empêche l'image de rétrécir */
+}
+
+.profile-pic {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%; /* Image ronde */
+  object-fit: cover; /* Recadre l'image si nécessaire */
+  border: 5px solid var(--couleur-accent); /* Bordure accentuée */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- Styles des Boutons --- */
+.hero-buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px; /* Espace entre les boutons */
+  justify-content: flex-start; /* Aligne les boutons à gauche */
+}
+
+.btn {
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: var(--couleur-accent);
+  color: var(--couleur-fond); /* Texte de la couleur du fond du thème */
+  border: 2px solid var(--couleur-accent);
+}
+
+.btn-primary:hover {
+  background-color: var(--couleur-accent-hover);
+  border-color: var(--couleur-accent-hover);
+  transform: translateY(-2px); /* Petit effet de survol */
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--couleur-texte-principal);
+  border: 2px solid var(--couleur-texte-principal);
+}
+
+.btn-secondary:hover {
+  background-color: var(--couleur-texte-principal);
+  color: var(--couleur-fond-composant); /* Inverse les couleurs au survol */
+  transform: translateY(-2px);
+}
+
+/* --- Responsive pour les petits écrans --- */
+@media (max-width: 900px) {
+  .hero-section {
+    flex-direction: column-reverse; /* Met l'image au-dessus du texte */
+    text-align: center;
+    gap: 40px;
+    padding: 30px;
+  }
+
+  .hero-text {
+    text-align: center; /* Centre le texte en mode colonne */
+  }
+
+  .hero-text h1 {
+    font-size: 2.8rem;
+  }
+
+  .hero-text h2 {
+    font-size: 1.6rem;
+  }
+
+  .hero-buttons {
+    justify-content: center; /* Centre les boutons en mode colonne */
+    flex-direction: column; /* Les boutons s'empilent */
+    gap: 15px;
+  }
+
+  .profile-pic {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 500px) {
+  .accueil-container {
+    margin: 30px auto;
+    padding: 0 10px;
+  }
+  .hero-section {
+    padding: 20px;
+  }
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+  .hero-text h2 {
+    font-size: 1.3rem;
+  }
+  .btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+}

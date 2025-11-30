@@ -1,0 +1,139 @@
+/* src/assets/css/Contact.css */
+
+.contact-page-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  /* Petit ajustement pour que ça ne colle pas au footer */
+  margin-bottom: 60px;
+}
+
+/* --- STYLE DES CARTES (Cohérent avec APropos) --- */
+.contact-card {
+  background-color: var(--couleur-fond-composant);
+  border-radius: 10px; /* Coins arrondis standard */
+  padding: 40px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contact-card h2,
+.contact-card h3 {
+  color: var(--couleur-accent);
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.contact-intro {
+  color: var(--couleur-texte-principal);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* --- STYLE DU FORMULAIRE --- */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--couleur-texte-principal);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px; /* Coins un peu arrondis */
+
+  /* STYLE DES INPUTS : Transparent avec bordure */
+  background-color: transparent;
+  border: 2px solid var(--couleur-texte-principal); /* Bordure visible */
+  color: var(--couleur-texte-principal);
+
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+/* Au focus (quand on clique dedans) */
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--couleur-accent); /* La bordure devient rouge Grimm */
+  box-shadow: 0 0 10px rgba(239, 96, 107, 0.2); /* Petite lueur */
+}
+
+/* Placeholder (le texte gris "Votre Nom") */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--couleur-texte-principal);
+  opacity: 0.5;
+}
+
+/* Bouton d'envoi */
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* --- STYLE DU BOUTON CV (Spécial) --- */
+.cv-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cv-content p {
+  margin: 0;
+  color: var(--couleur-texte-principal);
+}
+
+/* LE BOUTON CV : Style Nav mais moins rond */
+.btn-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase; /* Comme la Nav */
+  text-decoration: none;
+
+  /* Moins rond que la nav (qui est a 50px) */
+  border-radius: 10px;
+
+  /* Couleurs dynamiques */
+  background-color: transparent;
+  border: 2px solid var(--couleur-texte-principal);
+  color: var(--couleur-texte-principal);
+
+  transition: all 0.3s ease;
+}
+
+.btn-cv:hover {
+  background-color: var(--couleur-accent); /* Devient rouge */
+  border-color: var(--couleur-accent);
+  color: var(--couleur-fond); /* Texte devient couleur de fond */
+  transform: translateY(-2px);
+}
+
+/* Responsive Mobile */
+@media (max-width: 600px) {
+  .cv-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .btn-cv {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,42 @@
+/* src/components/ProjectCard.css */
+
+.project-card {
+  background-color: #ffffff;
+  border-radius: 8px; /* Bords arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  overflow: hidden; /* S'assure que l'image ne dépasse pas des bords arrondis */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation au survol */
+}
+
+.project-card:hover {
+  transform: translateY(-5px); /* Se soulève légèrement */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
+}
+
+/* Enlève le style par défaut des liens */
+.project-card a {
+  text-decoration: none;
+  color: inherit; /* Garde la couleur du texte du parent */
+}
+
+.project-card img {
+  width: 100%; /* L'image prend toute la largeur de la carte */
+  height: 200px; /* Hauteur fixe pour l'image */
+  object-fit: cover; /* S'assure que l'image couvre la zone sans se déformer */
+}
+
+.project-info {
+  padding: 15px 20px; /* Aération à l'intérieur de la carte */
+}
+
+.project-info h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.project-info p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}

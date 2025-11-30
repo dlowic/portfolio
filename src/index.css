@@ -1,0 +1,192 @@
+/* src/index.css */
+
+/* --- 1. LE RESET GLOBAL (C'EST LE FIX !) --- */
+/* Cette partie empêche le padding d'agrandir la page et de créer des barres de scroll */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- 2. DÉFINITION DES VARIABLES DE THÈME --- */
+/* =================================== */
+
+/* Mode Sombre (Grimm) - par défaut */
+:root,
+[data-theme="dark"] {
+  --couleur-fond: #000000;
+  --couleur-fond-composant: #2a2e35;
+  --couleur-fond-header: rgba(42, 46, 53, 0.8);
+
+  --couleur-texte-principal: #929292;
+  --couleur-texte-secondaire: #8a373d;
+
+  --couleur-accent: #ef606b;
+  --couleur-accent-hover: #c64153;
+}
+
+/* Mode "Clair" (Nightmare King Grimm) */
+[data-theme="light"] {
+  --couleur-fond: #fdf2f2;
+  --couleur-fond-composant: #ffffff;
+  --couleur-fond-header: rgba(127, 20, 50, 0.8);
+  --couleur-texte-principal: #2a2e35;
+  --couleur-texte-secondaire: #8a373d;
+  --couleur-accent: #ef606b;
+  --couleur-accent-hover: #c64153;
+}
+
+/* --- 3. STYLES GLOBAUX DU SITE --- */
+/* ========================== */
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  /* On applique les variables ! */
+  background-color: transparent;
+  color: var(--couleur-texte-principal);
+
+  /* Effet de transition fluide */
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  /* Empêche le scroll horizontal inutile */
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  /* Fait en sorte que #root soit au moins aussi haut que l'écran */
+  min-height: 100vh;
+
+  /* On le transforme en conteneur Flex vertical */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styles de base pour les titres et liens */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--couleur-accent);
+}
+
+a {
+  color: var(--couleur-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--couleur-accent-hover);
+}
+
+/* --- CONFIGURATION DU MAIN (Contenu) --- */
+main {
+  flex: 1 0 auto; /* Prend tout l'espace disponible pour pousser le footer */
+
+  /* Padding: Haut | Droite | Bas | Gauche */
+  /* J'ai ajouté 20px sur les côtés pour que le texte ne touche pas le bord de l'écran */
+  padding: 120px 20px 20px 20px;
+}
+
+/* Ajustement pour mobile */
+@media (max-width: 900px) {
+  main {
+    /* Sur mobile, on a besoin de moins d'espace en haut */
+    padding-top: 80px;
+  }
+}
+.app-content {
+  /* Layout pour le footer sticky */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+
+  /* Animation */
+  transition: opacity 1s ease, filter 1s ease;
+  opacity: 1;
+
+  /* ⚠️ IMPORTANT : J'ai SUPPRIMÉ la ligne "filter: blur(0px);" ici.
+     C'est elle qui cassait ton Header fixed et le responsive ! */
+}
+
+/* Quand on est inactif : on cache tout ! */
+.app-content.idle {
+  opacity: 0;
+  filter: blur(10px); /* On applique le flou SEULEMENT ici */
+  pointer-events: none;
+}
+
+/* 2. Le message "Vous êtes toujours là ?" */
+/* src/index.css */
+
+/* --- LE MESSAGE D'INACTIVITÉ RESPONSIVE --- */
+
+.idle-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* IMPORTANT : On limite la largeur pour que ça ne touche pas les bords sur mobile */
+  width: 90%;
+  max-width: 600px; /* Sur PC, ça ne sera pas trop large */
+
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Le Titre */
+.idle-title {
+  font-size: 3rem; /* Taille PC */
+  font-weight: bold;
+  color: var(--couleur-accent);
+  margin-bottom: 20px;
+  line-height: 1.2; /* Pour éviter que les lignes se chevauchent si ça passe à la ligne */
+}
+
+/* Le Sous-titre */
+.idle-subtitle {
+  font-size: 1.2rem; /* Taille PC */
+  color: var(--couleur-texte-principal);
+  font-weight: normal;
+}
+
+/* Quand on est inactif, le message apparaît */
+.idle-message.visible {
+  opacity: 1;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* --- VERSION MOBILE (Responsive) --- */
+@media (max-width: 600px) {
+  .idle-title {
+    font-size: 2rem; /* On réduit la taille du titre pour le mobile */
+  }
+
+  .idle-subtitle {
+    font-size: 1rem; /* On réduit un peu le sous-titre */
+    padding: 0 20px; /* On ajoute un peu de marge pour ne pas toucher les bords */
+  }
+
+  /* On ajuste l'animation pour qu'elle bouge moins fort sur petit écran */
+  @keyframes float {
+    0% {
+      transform: translate(-50%, -50%) translateY(0px);
+    }
+    50% {
+      transform: translate(-50%, -50%) translateY(-10px);
+    } /* Moins d'amplitude */
+    100% {
+      transform: translate(-50%, -50%) translateY(0px);
+    }
+  }
+}

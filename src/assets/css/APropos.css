@@ -1,0 +1,176 @@
+/* src/assets/css/APropos.css */
+
+.apropos-page-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Le style de "Carte" de base pour chaque section */
+.apropos-card {
+  background-color: var(--couleur-fond-composant);
+  border-radius: 10px;
+  padding: 30px 40px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.apropos-card h2 {
+  color: var(--couleur-accent);
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  border-bottom: 2px solid var(--couleur-fond); /* Ligne de séparation subtile */
+  padding-bottom: 10px;
+}
+
+.apropos-card p {
+  color: var(--couleur-texte-principal);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* --- 2. Style de la Timeline Verticale --- */
+.timeline-container {
+  position: relative;
+  padding-left: 30px; /* Espace pour la ligne et le point */
+}
+
+/* La ligne verticale (en rouge Grimm) */
+.timeline-container::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  bottom: 5px;
+  width: 3px;
+  background-color: var(--couleur-accent);
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+/* Le point sur la ligne (en rouge Grimm) */
+.timeline-dot {
+  position: absolute;
+  left: -24px; /* (30px de padding) - (moitié de la largeur) */
+  top: 5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: var(--couleur-accent);
+  border: 3px solid var(--couleur-fond-composant); /* Fait un "trou" */
+}
+
+.timeline-content h3 {
+  color: var(--couleur-texte-principal);
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.timeline-content p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--couleur-texte-secondaire);
+}
+.timeline-content p em {
+  font-style: italic;
+}
+
+/* --- 4. Wrapper du Logo Loop --- */
+.logo-loop-wrapper {
+  position: relative;
+  /* On lui donne une hauteur pour que le fondu s'applique */
+  height: 80px;
+  margin-top: 40px;
+  /* On s'assure que le texte des logos hérite de la bonne couleur */
+  color: var(--couleur-texte-principal);
+  overflow: hidden;
+}
+
+/* Augmente la taille des icônes react-icons */
+.logo-loop-wrapper .logoloop__node svg {
+  font-size: 40px;
+  color: var(--couleur-texte-principal);
+  transition: color 0.3s ease;
+}
+.logo-loop-wrapper .logoloop__link:hover .logoloop__node svg {
+  color: var(--couleur-accent);
+}
+
+/* --- 5. Carte de Disponibilité --- */
+#disponibilite {
+  /* 100px (header) + 40px (espace) = 140px */
+  scroll-margin-top: 140px;
+}
+
+.status-line {
+  display: flex;
+  align-items: center; /* Centre le point verticalement par rapport au texte */
+  flex-wrap: nowrap; /* <--- C'EST ÇA LA SOLUTION (Force à rester sur une ligne) */
+  gap: 15px;
+  font-weight: bold;
+  font-size: 1.1rem !important;
+}
+
+.status-dot {
+  position: relative; /* Très important pour que le after se place bien */
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: #28a745; /* Vert */
+  border-radius: 50%;
+  flex-shrink: 0;
+  z-index: 1; /* Pour être devant le pulse */
+}
+
+/* L'ANIMATION PULSE */
+.status-dot::after {
+  content: ""; /* OBLIGATOIRE sinon rien ne s'affiche */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background-color: inherit; /* Prend le vert du parent */
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: -1; /* Derrière le point */
+  animation: pulse-responsive 2s infinite ease-out;
+}
+
+@keyframes pulse-responsive {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+.availability-card .btn-primary {
+  margin-top: 20px;
+  color: var(--couleur-fond);
+}
+
+/* Ajustement mobile spécifique */
+/* Ajustement mobile spécifique */
+@media (max-width: 600px) {
+  .status-line {
+    font-size: 1rem !important;
+    /* On garde 'center' ou on met 'flex-start' si le texte fait 3 lignes */
+    align-items: flex-start;
+    padding-top: 5px;
+  }
+
+  /* Petit ajustement pour que le point soit bien aligné avec la 1ère ligne de texte sur mobile */
+  .status-line .status-dot {
+    margin-top: 5px;
+  }
+}
