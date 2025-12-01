@@ -12,6 +12,19 @@ import monCV from "../assets/ressource/mon-cv.pdf";
 function Contact() {
   return (
     <div className="contact-page-container">
+      {/* Section 2 : Le CV */}
+      <div className="contact-card cv-card">
+        <div className="cv-content">
+          <h3>Mon Curriculum Vitae</h3>
+          <p>
+            Vous souhaitez en savoir plus sur mon parcours et mes compétences ?
+          </p>
+        </div>
+
+        <a href={monCV} download="CV_Loic_Digbeu.pdf" className="btn-cv">
+          Télécharger mon CV <FaDownload />
+        </a>
+      </div>
       <div className="contact-card">
         <h2>Me Contacter</h2>
         {/* 2. INSERTION DU BADGE ICI */}
@@ -65,20 +78,6 @@ function Contact() {
             Envoyer <FaPaperPlane className="btn-icon" />
           </button>
         </form>
-      </div>
-
-      {/* Section 2 : Le CV */}
-      <div className="contact-card cv-card">
-        <div className="cv-content">
-          <h3>Mon Curriculum Vitae</h3>
-          <p>
-            Vous souhaitez en savoir plus sur mon parcours et mes compétences ?
-          </p>
-        </div>
-
-        <a href={monCV} download="CV_Loic_Digbeu.pdf" className="btn-cv">
-          Télécharger mon CV <FaDownload />
-        </a>
       </div>
     </div>
   );
