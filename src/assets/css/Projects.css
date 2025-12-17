@@ -1,9 +1,11 @@
 /* src/assets/css/Projects.css */
 
 .projects-page-container {
-  max-width: 1400px; /* Plus large pour accueillir les grosses cartes */
+  /* AVANT : 1200px ou 1400px */
+  max-width: 1500px;
+
   margin: 40px auto;
-  padding: 0 20px;
+  padding: 0 40px;
 }
 
 /* --- EN-TÊTE --- */

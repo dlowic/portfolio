@@ -128,34 +128,47 @@ main {
 /* --- LE MESSAGE D'INACTIVITÉ RESPONSIVE --- */
 
 .idle-message {
+  /* 1. On couvre tout l'écran */
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 
-  /* IMPORTANT : On limite la largeur pour que ça ne touche pas les bords sur mobile */
-  width: 90%;
-  max-width: 600px; /* Sur PC, ça ne sera pas trop large */
+  /* 2. On utilise Flexbox pour centrer le contenu parfaitement */
+  display: flex;
+  flex-direction: column; /* Les textes l'un sous l'autre */
+  justify-content: center; /* Centré Verticalement */
+  align-items: center; /* Centré Horizontalement */
 
-  text-align: center;
-  opacity: 0;
-  transition: opacity 1s ease;
   z-index: 9999;
   pointer-events: none;
+
+  /* Animation d'apparition */
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Le contenu texte (pour l'animation de flottement) */
+.idle-message-content {
+  text-align: center;
+  /* On limite la largeur pour pas que ça touche les bords sur mobile */
+  width: 90%;
+  max-width: 600px;
 }
 
 /* Le Titre */
 .idle-title {
-  font-size: 3rem; /* Taille PC */
-  font-weight: bold;
+  font-size: 3rem;
+  font-weight: 800;
   color: var(--couleur-accent);
   margin-bottom: 20px;
-  line-height: 1.2; /* Pour éviter que les lignes se chevauchent si ça passe à la ligne */
+  line-height: 1.1;
 }
 
 /* Le Sous-titre */
 .idle-subtitle {
-  font-size: 1.2rem; /* Taille PC */
+  font-size: 1.2rem;
   color: var(--couleur-texte-principal);
   font-weight: normal;
 }
@@ -163,30 +176,34 @@ main {
 /* Quand on est inactif, le message apparaît */
 .idle-message.visible {
   opacity: 1;
+  /* On applique l'animation uniquement ici */
+}
+
+/* L'animation s'applique maintenant au CONTENU (textes), pas au conteneur */
+.idle-message.visible .idle-title,
+.idle-message.visible .idle-subtitle {
   animation: float 3s ease-in-out infinite;
 }
 
-/* --- VERSION MOBILE (Responsive) --- */
+/* L'animation est beaucoup plus simple maintenant (plus de translate -50%) */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* --- VERSION MOBILE --- */
 @media (max-width: 600px) {
   .idle-title {
-    font-size: 2rem; /* On réduit la taille du titre pour le mobile */
+    font-size: 2rem;
   }
-
   .idle-subtitle {
-    font-size: 1rem; /* On réduit un peu le sous-titre */
-    padding: 0 20px; /* On ajoute un peu de marge pour ne pas toucher les bords */
-  }
-
-  /* On ajuste l'animation pour qu'elle bouge moins fort sur petit écran */
-  @keyframes float {
-    0% {
-      transform: translate(-50%, -50%) translateY(0px);
-    }
-    50% {
-      transform: translate(-50%, -50%) translateY(-10px);
-    } /* Moins d'amplitude */
-    100% {
-      transform: translate(-50%, -50%) translateY(0px);
-    }
+    font-size: 1rem;
   }
 }

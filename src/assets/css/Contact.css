@@ -1,17 +1,26 @@
 /* src/assets/css/Contact.css */
 
 .contact-page-container {
-  max-width: 800px;
+  /* On aligne le conteneur global sur 1500px */
+  max-width: 1500px;
   margin: 40px auto;
-  padding: 0 20px;
-  /* Petit ajustement pour que ça ne colle pas au footer */
+  padding: 0 40px;
   margin-bottom: 60px;
+
+  /* On centre les cartes à l'intérieur */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* --- STYLE DES CARTES (Cohérent avec APropos) --- */
+/* --- STYLE DES CARTES --- */
 .contact-card {
+  /* On limite la largeur de la carte pour la lisibilité */
+  width: 100%;
+  max-width: 900px; /* Le formulaire ne dépassera pas ça */
+
   background-color: var(--couleur-fond-composant);
-  border-radius: 10px; /* Coins arrondis standard */
+  border-radius: 10px;
   padding: 40px;
   margin-bottom: 30px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -76,10 +85,37 @@
 
 /* Bouton d'envoi */
 .submit-btn {
+  /* Mise en page */
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   cursor: pointer;
+
+  /* ESTHÉTIQUE (Ce qui manquait) */
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 10px; /* Même arrondi que tes inputs */
+
+  /* Couleurs : On le met en Rouge (Accent) par défaut car c'est l'action principale */
+  background-color: var(--couleur-accent);
+  color: var(
+    --couleur-fond
+  ); /* Le texte prend la couleur du fond pour le contraste */
+  border: 2px solid var(--couleur-accent);
+
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(239, 96, 107, 0.3); /* Petite ombre rouge */
+}
+
+/* Effet au survol */
+.submit-btn:hover {
+  background-color: transparent; /* Devient transparent */
+  color: var(--couleur-accent); /* Le texte devient rouge */
+  transform: translateY(-2px); /* Il monte un peu */
+  box-shadow: 0 6px 20px rgba(239, 96, 107, 0.5);
 }
 
 /* --- STYLE DU BOUTON CV (Spécial) --- */

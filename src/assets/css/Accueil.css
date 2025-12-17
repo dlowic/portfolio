@@ -1,157 +1,220 @@
 /* src/assets/css/Accueil.css */
 
-.accueil-container {
-  max-width: 1000px;
-  margin: 60px auto; /* Centre le conteneur et donne de l'espace */
-  padding: 0 20px;
-  text-align: center; /* Centre le texte par défaut */
-}
-
-.hero-section {
+/* On force le container à prendre toute la largeur disponible, sans padding global */
+.accueil-container.full-width {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  height: calc(100vh - 80px); /* Toute la hauteur moins le header */
+  min-height: 600px;
   display: flex;
-  flex-direction: row; /* Texte à gauche, image à droite */
-  align-items: center; /* Centre verticalement */
-  justify-content: center; /* Centre horizontalement si pas assez large */
-  gap: 60px; /* Espacement entre le texte et l'image */
-
-  /* Ajoute un léger fond pour les modes sombres, ou reste transparent pour le mode clair */
-  background-color: var(--couleur-fond-composant);
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Ombre subtile */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden; /* Important pour pas avoir de scrollbar */
 }
 
-.hero-text {
-  flex: 1; /* Prend l'espace restant */
-  text-align: left; /* Aligne le texte à gauche */
-}
-
-.hero-text h1 {
-  font-size: 3.5rem; /* Grande taille pour le nom */
-  margin-bottom: 10px;
-  color: var(--couleur-accent); /* Utilise ta couleur d'accent */
-}
-
-.hero-text h2 {
-  font-size: 2rem; /* Taille moyenne pour le titre */
-  margin-top: 0;
-  margin-bottom: 30px;
-  color: var(--couleur-texte-principal); /* Texte principal */
-}
-
-.hero-text p {
-  font-size: 1.15rem; /* Texte de paragraphe confortable */
-  line-height: 1.8;
-  color: var(--couleur-texte-principal);
-  margin-bottom: 40px;
-}
-
-.hero-image {
-  flex-shrink: 0; /* Empêche l'image de rétrécir */
-}
-
-.profile-pic {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%; /* Image ronde */
-  object-fit: cover; /* Recadre l'image si nécessaire */
-  border: 5px solid var(--couleur-accent); /* Bordure accentuée */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* --- Styles des Boutons --- */
-.hero-buttons {
-  margin-top: 30px;
+/* --- CÔTÉ GAUCHE (TEXTE) --- */
+.split-left {
+  flex: 1;
   display: flex;
-  gap: 20px; /* Espace entre les boutons */
-  justify-content: flex-start; /* Aligne les boutons à gauche */
-}
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
 
-.btn {
-  padding: 15px 30px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.btn-primary {
-  background-color: var(--couleur-accent);
-  color: var(--couleur-fond); /* Texte de la couleur du fond du thème */
-  border: 2px solid var(--couleur-accent);
-}
-
-.btn-primary:hover {
-  background-color: var(--couleur-accent-hover);
-  border-color: var(--couleur-accent-hover);
-  transform: translateY(-2px); /* Petit effet de survol */
-}
-
-.btn-secondary {
+  /* AVANT : background-color: var(--couleur-fond); */
+  /* MAINTENANT : Transparent pour voir les particules ! */
   background-color: transparent;
+
+  z-index: 2;
+}
+
+/* ... (Le reste de content-wrapper, big-title, etc. ne change pas) ... */
+
+/* AJOUTE ÇA JUSTE APRÈS .outline-text pour gérer le point */
+.big-title .dot {
+  color: var(--couleur-accent); /* Le Rouge Grimm */
+  -webkit-text-stroke: 0px; /* Pas de contour, il est plein */
+  display: inline-block;
+}
+
+.content-wrapper {
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: flex-start; /* Aligné à gauche */
+}
+
+.big-title {
+  font-size: 5rem;
+  line-height: 0.9;
+  font-weight: 900;
+  margin: 0;
   color: var(--couleur-texte-principal);
-  border: 2px solid var(--couleur-texte-principal);
+  text-transform: uppercase;
+  letter-spacing: -2px;
 }
 
-.btn-secondary:hover {
+/* Effet contour sur le nom de famille */
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--couleur-texte-principal);
+  transition: all 0.3s ease;
+}
+
+/* Petit effet interactif au survol du bloc titre */
+.content-wrapper:hover .outline-text {
+  color: var(--couleur-accent);
+  -webkit-text-stroke: 0px;
+}
+
+.separator {
+  width: 80px;
+  height: 4px;
+  background-color: var(--couleur-accent);
+  margin: 10px 0;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--couleur-texte-principal);
+  opacity: 0.8;
+  max-width: 90%;
+}
+
+/* BOUTONS */
+.btn-group {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.btn-solid {
   background-color: var(--couleur-texte-principal);
-  color: var(--couleur-fond-composant); /* Inverse les couleurs au survol */
-  transform: translateY(-2px);
+  color: var(--couleur-fond);
+  padding: 15px 35px;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s;
+  border-radius: 4px; /* Coins carrés pour le style "Block" */
 }
 
-/* --- Responsive pour les petits écrans --- */
+.btn-solid:hover {
+  background-color: var(--couleur-accent);
+  color: #fff;
+  gap: 15px;
+}
+
+.btn-link {
+  color: var(--couleur-texte-principal);
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.btn-link:hover {
+  border-color: var(--couleur-accent);
+  color: var(--couleur-accent);
+}
+
+/* --- CÔTÉ DROIT (IMAGE) --- */
+.split-right {
+  flex: 1; /* 50% de largeur */
+  position: relative;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.image-mask {
+  width: 100%;
+  height: 100%;
+}
+
+.cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* L'image remplit tout le bloc sans se déformer */
+  opacity: 0.8; /* Légèrement sombre pour faire ressortir le ticker */
+  filter: grayscale(100%); /* Optionnel : Noir et blanc pour le style */
+  transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+/* Au survol de la droite, l'image reprend ses couleurs */
+.split-right:hover .cover-img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+/* --- BANDE DÉFILANTE (TICKER) --- */
+.ticker-wrap {
+  position: absolute;
+  bottom: 10%;
+  left: -10%; /* Déborde un peu */
+  width: 120%;
+  background-color: var(--couleur-accent);
+  transform: rotate(-5deg); /* Incliné pour le style dynamique */
+  overflow: hidden;
+  padding: 15px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.ticker {
+  display: flex;
+  white-space: nowrap; /* Empêche le retour à la ligne */
+  animation: ticker 10s linear infinite; /* Animation continue */
+}
+
+.ticker__item {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+  padding: 0 30px;
+  text-transform: uppercase;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  } /* Défile de la moitié (la longueur du contenu dupliqué) */
+}
+
+/* --- RESPONSIVE --- */
 @media (max-width: 900px) {
-  .hero-section {
-    flex-direction: column-reverse; /* Met l'image au-dessus du texte */
+  .accueil-container.full-width {
+    flex-direction: column-reverse; /* Image en haut, texte en bas sur mobile */
+    height: auto;
+  }
+
+  .split-left {
+    padding: 40px 20px;
     text-align: center;
-    gap: 40px;
-    padding: 30px;
   }
 
-  .hero-text {
-    text-align: center; /* Centre le texte en mode colonne */
+  .content-wrapper {
+    align-items: center; /* Centre le texte sur mobile */
   }
 
-  .hero-text h1 {
-    font-size: 2.8rem;
+  .big-title {
+    font-size: 3.5rem;
   }
 
-  .hero-text h2 {
-    font-size: 1.6rem;
+  .split-right {
+    height: 400px; /* Hauteur fixe pour l'image sur mobile */
   }
 
-  .hero-buttons {
-    justify-content: center; /* Centre les boutons en mode colonne */
-    flex-direction: column; /* Les boutons s'empilent */
-    gap: 15px;
-  }
-
-  .profile-pic {
-    width: 250px;
-    height: 250px;
-  }
-}
-
-@media (max-width: 500px) {
-  .accueil-container {
-    margin: 30px auto;
-    padding: 0 10px;
-  }
-  .hero-section {
-    padding: 20px;
-  }
-  .hero-text h1 {
-    font-size: 2.2rem;
-  }
-  .hero-text h2 {
-    font-size: 1.3rem;
-  }
-  .btn {
-    padding: 12px 20px;
-    font-size: 1rem;
+  .ticker-wrap {
+    bottom: 20px;
+    transform: rotate(0deg); /* Droit sur mobile */
+    width: 100%;
+    left: 0;
   }
 }

@@ -32,6 +32,8 @@
 .logoloop__list {
   display: flex;
   align-items: center;
+  margin: 0; /* Sécurité supplémentaire */
+  padding: 0; /* Sécurité supplémentaire */
 }
 
 .logoloop--vertical .logoloop__list {

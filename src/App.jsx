@@ -48,7 +48,7 @@ function App() {
       {/* B. Le Message d'inactivité */}
       <div className={`idle-message ${isIdle ? "visible" : ""}`}>
         {/* J'ai ajouté des classes : idle-title et idle-subtitle */}
-        <h2 className="idle-title">Vous êtes toujours là ?</h2>
+        <h2 className="idle-title">Êtes-vous toujours là ?</h2>
         <p className="idle-subtitle">
           Touchez l'écran ou bougez la souris pour revenir
         </p>

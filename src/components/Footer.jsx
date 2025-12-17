@@ -4,15 +4,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../assets/css/Footer.css";
 
-// Import des icônes (j'ai mis celles de ton image + Mail)
-import {
-  FaGithub,
-  FaLinkedin,
-  FaTwitter,
-  FaInstagram,
-  FaFacebook,
-  FaTiktok,
-} from "react-icons/fa";
+// Import uniquement des icônes que tu utilises
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 function Footer() {
@@ -35,51 +28,31 @@ function Footer() {
 
         {/* DROITE : Les Icônes */}
         <div className="footer-right social-icons">
-          {/* Remplace les href="#" par tes vrais liens ! */}
+          {/* GitHub */}
           <a
-            href="https://github.com/"
+            href="https://github.com/dlowic"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
           >
             <FaGithub />
           </a>
+
+          {/* LinkedIn */}
           <a
-            href="https://linkedin.com/"
+            href="https://www.linkedin.com/in/loic-digbeu-594792347/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
           >
             <FaLinkedin />
           </a>
-          <a
-            href="https://twitter.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Twitter"
-          >
-            <FaTwitter />
-          </a>
-          <a
-            href="https://instagram.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <FaInstagram />
-          </a>
-          <a
-            href="https://tiktok.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="TikTok"
-          >
-            <FaTiktok />
-          </a>
-          {/* J'ai ajouté l'email car c'est important pour un portfolio */}
-          <a href="mailto:ton-email@gmail.com" aria-label="Email">
+
+          {/* Email -> Redirection vers la page Contact */}
+          {/* On utilise Link au lieu de <a> pour rester dans l'application */}
+          <Link to="/contact" aria-label="Me contacter">
             <MdEmail />
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

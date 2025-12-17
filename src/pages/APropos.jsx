@@ -15,6 +15,7 @@ import {
   SiVite,
 } from "react-icons/si";
 
+// --- DONNÉES ---
 const techLogos = [
   { node: <SiReact />, title: "React", href: "https://react.dev" },
   { node: <SiJavascript />, title: "JavaScript", href: "#" },
@@ -26,111 +27,172 @@ const techLogos = [
   { node: <SiFigma />, title: "Figma", href: "https://www.figma.com" },
 ];
 
+const skillsData = [
+  {
+    category: "Développement Frontend",
+    items: [
+      "React.js",
+      "JavaScript (ES6+)",
+      "HTML5 / CSS3",
+      "Tailwind CSS",
+      "Animations",
+    ],
+  },
+  {
+    category: "Outils & Backend",
+    items: ["Git & GitHub", "Vite", "Node.js (Basics)", "VS Code", "NPM"],
+  },
+  {
+    category: "Design & UI/UX",
+    items: [
+      "Figma",
+      "Maquettage",
+      "Adobe Photoshop",
+      "Responsive Design",
+      "Accessibilité",
+    ],
+  },
+];
+
 function APropos() {
   const { hash } = useLocation();
 
-  // --- LE FIX ULTIME POUR LE SCROLL ---
   useEffect(() => {
-    // Fonction qui tente de scroller
     const scrollToSection = () => {
-      // On enlève le #
       const id = hash.replace("#", "");
-      if (!id) return; // Si pas d'ID, on fait rien
-
+      if (!id) return;
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
       }
     };
 
-    // Si on a un hash (ex: #disponibilite)
     if (hash) {
-      // On essaie 3 fois pour être sûr que la page est chargée
-      scrollToSection(); // Tout de suite
-      setTimeout(scrollToSection, 100); // Après 0.1s
-      setTimeout(scrollToSection, 500); // Après 0.5s (au cas où)
+      scrollToSection();
+      setTimeout(scrollToSection, 100);
+      setTimeout(scrollToSection, 500);
     } else {
-      // Si pas de hash, on remonte en haut
       window.scrollTo(0, 0);
     }
   }, [hash]);
 
   return (
     <div className="apropos-page-container">
-      <section className="apropos-card">
-        <h2>À Propos de Moi</h2>
-        <p>
-          Je suis Loic Digbeu, étudiant en BUT MMI (Métiers du Multimédia et de
-          l'Internet), actuellement en deuxième année en parcours dev.
-        </p>
-        <p>Depuis que j'ai découvert le code, je suis fasciné.</p>
-      </section>
+      <div className="bento-grid">
+        {/* --- 1. BIO (Grande carte en haut à gauche) --- */}
+        <div className="bento-item item-bio">
+          <h2>À Propos de Moi</h2>
+          <p>
+            Je suis Loic Digbeu, étudiant en{" "}
+            <strong>BUT MMI (Métiers du Multimédia et de l'Internet)</strong>,
+            actuellement en deuxième année avec une spécialisation en{" "}
+            <strong>Développement Web</strong>.
+          </p>
+          <p>
+            Mon profil est hybride : je comprends les enjeux du design et je
+            maîtrise la logique du code. Cette double compétence me permet de
+            dialoguer efficacement avec les designers tout en produisant un code
+            propre et performant.
+          </p>
+          <p>
+            Actuellement, je me focalise sur l'écosystème <strong>React</strong>{" "}
+            pour créer des interfaces utilisateur modernes, fluides et
+            engageantes.
+          </p>
+        </div>
 
-      <section className="apropos-card">
-        <h2>Mon Parcours</h2>
-        <div className="timeline-container">
-          <div className="timeline-item">
-            <div className="timeline-dot"></div>
-            <div className="timeline-content">
-              <h3>2024 - 2028 (en cours)</h3>
-              <p>
-                BUT MMI - Parcours Développement Web
-                <br />
-                <em>IUT de Bobigny</em>
-              </p>
-            </div>
+        {/* --- 2. COMPÉTENCES (Grande tour verticale à droite) --- */}
+        <div className="bento-item item-skills">
+          <h2>Arsenal Technique</h2>
+          <div className="skills-grid">
+            {skillsData.map((group, index) => (
+              <div key={index} className="skill-group">
+                <h3>{group.category}</h3>
+                <div className="skill-tags">
+                  {group.items.map((skill, idx) => (
+                    <span key={idx} className="skill-badge">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
+        </div>
 
-          <div className="timeline-item">
-            <div className="timeline-dot"></div>
-            <div className="timeline-content">
-              <h3>2023</h3>
-              <p>
-                Obtention du Baccalauréat
-                <br />
-                <em>Lycée Langevin Wallon</em>
-              </p>
+        {/* --- 3. DISPONIBILITÉ (Petit carré en bas à gauche) --- */}
+        <div className="bento-item item-avail" id="disponibilite">
+          <h2>Disponibilité</h2>
+          <div className="status-container">
+            <p className="status-line">
+              <span className="status-dot"></span>
+              En recherche de stage
+            </p>
+            <p className="status-details">
+              Je recherche un stage de <strong>10 à 12 semaines</strong> en
+              développement Front-end ou Fullstack JS.
+              <br />
+              <br />
+              <strong>Période :</strong> Mai à Juillet 2026.
+            </p>
+          </div>
+        </div>
+
+        {/* --- 4. PARCOURS (Petit carré en bas au milieu) --- */}
+        <div className="bento-item item-timeline">
+          <h2>Mon Parcours</h2>
+          <div className="timeline-container">
+            {/* Item 1 : BUT */}
+            <div className="timeline-item">
+              <div className="timeline-dot"></div>
+              <div className="timeline-content">
+                <h3>2023 - 2027</h3>
+                <p>
+                  <strong>
+                    BUT MMI (Mérier du Multimédia et de l'Internet)
+                  </strong>
+                  <br />
+                  <em>IUT de Bobigny</em>
+                </p>
+                <p className="timeline-desc">
+                  Formation polyvalente sur 3 ans : Dev Web, Design et Com.
+                </p>
+              </div>
+            </div>
+
+            {/* Item 2 : Bac */}
+            <div className="timeline-item">
+              <div className="timeline-dot"></div>
+              <div className="timeline-content">
+                <h3>2023</h3>
+                <p>
+                  <strong>Baccalauréat</strong>
+                  <br />
+                  <em>Lycée Langevin Wallon</em>
+                </p>
+                <p className="timeline-desc">
+                  Obtention du diplôme avec mention.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </section>
 
-      <section className="apropos-card">
-        <h2>Compétences Techniques</h2>
-        <p>Fk la mmi pas beaucoup moi faire plus tard.</p>
-        <div className="logo-loop-wrapper">
-          <LogoLoop
-            logos={techLogos}
-            speed={100}
-            direction="left"
-            logoHeight={40}
-            gap={40}
-            hoverSpeed={0}
-            fadeOut
-            scaleOnHover
-          />
+        {/* --- 5. LOGOS (Barre tout en bas) --- */}
+        <div className="bento-item item-logos">
+          <div className="logo-loop-wrapper">
+            <LogoLoop
+              logos={techLogos}
+              speed={100}
+              direction="left"
+              logoHeight={45}
+              gap={50}
+              hoverSpeed={0}
+              scaleOnHover
+            />
+          </div>
         </div>
-      </section>
-
-      {/* --- VÉRIFIE BIEN L'ID ICI --- */}
-      <section className="apropos-card availability-card" id="disponibilite">
-        <h2>Disponibilité</h2>
-        <p className="status-line">
-          <span className="status-dot"></span>
-          Actuellement en recherche active de stage d'une durée de 3 mois entre
-          Mai à Juillet 2026.
-        </p>
-        <p className="status-line">
-          <span className="status-dot"></span>
-          Actuellement en recherche active d'une alternace pour la rentrer
-          scolaire 2026-2027.
-        </p>
-        <br />
-        <p>
-          Je suis ouvert à toute opportunité me permettant de contribuer à un
-          projet concret et de monter en compétences.
-        </p>
-      </section>
+      </div>
     </div>
   );
 }

@@ -12,12 +12,13 @@
 }
 
 .footer-container {
-  max-width: 1400px; /* Largeur max pour ne pas être trop écarté sur grands écrans */
-  margin: 0 auto;
+  /* AVANT : 1400px */
+  max-width: 1500px;
 
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between; /* Logo à gauche, Icônes à droite */
-  align-items: center; /* Alignement vertical */
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* --- PARTIE GAUCHE (Logo) --- */
