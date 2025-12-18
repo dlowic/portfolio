@@ -1,9 +1,8 @@
 // src/hooks/useIdle.js
 import { useState, useEffect } from "react";
 
-// Par défaut, on dit que l'utilisateur est inactif après 5 secondes (5000ms)
-// Tu pourras changer ce chiffre plus tard.
-export default function useIdle(delay = 5000) {
+// Par défaut,  l'utilisateur est inactif après 5 secondes (5000ms)
+export default function useIdle(delay = 120000) {
   const [isIdle, setIsIdle] = useState(false);
 
   useEffect(() => {

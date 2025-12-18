@@ -1,50 +1,56 @@
 /* src/assets/css/Accueil.css */
 
-/* On force le container à prendre toute la largeur disponible, sans padding global */
+/* --- CONTENEUR GLOBAL --- */
 .accueil-container.full-width {
   max-width: 100%;
   margin: 0;
   padding: 0;
-  height: calc(100vh - 80px); /* Toute la hauteur moins le header */
-  min-height: 600px;
+
+  /* HAUTEUR CORRIGÉE : 
+     On enlève 250px pour laisser une place royale au Header et au Footer.
+     Si tu as encore du scroll, augmente ce chiffre (ex: 300px).
+  */
+  height: calc(100vh - 250px);
+
+  /* IMPORTANT : On met min-height à 0 ou très bas pour ne jamais forcer le scroll */
+  min-height: 400px;
+
   display: flex;
-  overflow: hidden; /* Important pour pas avoir de scrollbar */
+
+  /* Coupe net tout ce qui dépasse (le ticker) */
+  overflow: hidden;
+  position: relative;
 }
 
 /* --- CÔTÉ GAUCHE (TEXTE) --- */
 .split-left {
-  flex: 1;
+  /* AVANT : flex: 1; (50%) */
+  /* MAINTENANT : Prend plus de place (60%) */
+  flex: 1.5;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 60px;
-
-  /* AVANT : background-color: var(--couleur-fond); */
-  /* MAINTENANT : Transparent pour voir les particules ! */
+  padding: 40px;
   background-color: transparent;
-
   z-index: 2;
 }
 
-/* ... (Le reste de content-wrapper, big-title, etc. ne change pas) ... */
-
-/* AJOUTE ÇA JUSTE APRÈS .outline-text pour gérer le point */
-.big-title .dot {
-  color: var(--couleur-accent); /* Le Rouge Grimm */
-  -webkit-text-stroke: 0px; /* Pas de contour, il est plein */
-  display: inline-block;
-}
-
 .content-wrapper {
-  max-width: 550px;
+  max-width: 600px; /* On augmente un peu la largeur max (avant 550px) */
   display: flex;
   flex-direction: column;
   gap: 25px;
-  align-items: flex-start; /* Aligné à gauche */
+  align-items: flex-start;
+  /* Important : On s'assure que le contenu ne dépasse pas du bloc parent */
+  width: 100%;
 }
 
 .big-title {
-  font-size: 5rem;
+  font-size: clamp(
+    3rem,
+    5vw,
+    5rem
+  ); /* Taille adaptative pour éviter que ça casse sur petits écrans */
   line-height: 0.9;
   font-weight: 900;
   margin: 0;
@@ -53,14 +59,18 @@
   letter-spacing: -2px;
 }
 
-/* Effet contour sur le nom de famille */
+.big-title .dot {
+  color: var(--couleur-accent);
+  -webkit-text-stroke: 0px;
+  display: inline-block;
+}
+
 .outline-text {
   color: transparent;
   -webkit-text-stroke: 2px var(--couleur-texte-principal);
   transition: all 0.3s ease;
 }
 
-/* Petit effet interactif au survol du bloc titre */
 .content-wrapper:hover .outline-text {
   color: var(--couleur-accent);
   -webkit-text-stroke: 0px;
@@ -84,22 +94,33 @@
 /* BOUTONS */
 .btn-group {
   display: flex;
-  gap: 20px;
+  gap: 15px; /* Un peu moins d'écart entre les boutons (avant 20px) */
   margin-top: 10px;
   align-items: center;
+
+  /* C'EST LA CORRECTION PRINCIPALE : */
+  /* Si l'écran est trop étroit, le 2ème bouton passera dessous au lieu d'être coupé */
+  flex-wrap: wrap;
+  width: 100%; /* S'assure de prendre la place dispo */
 }
 
 .btn-solid {
   background-color: var(--couleur-texte-principal);
   color: var(--couleur-fond);
-  padding: 15px 35px;
+
+  /* On réduit légèrement le padding horizontal pour gagner de la place */
+  padding: 15px 25px; /* (Avant 35px) */
+
   font-weight: bold;
   text-decoration: none;
   display: flex;
   align-items: center;
   gap: 10px;
   transition: all 0.3s;
-  border-radius: 4px; /* Coins carrés pour le style "Block" */
+  border-radius: 4px;
+
+  /* On s'assure que le texte ne se coupe pas */
+  white-space: nowrap;
 }
 
 .btn-solid:hover {
@@ -115,7 +136,6 @@
   border-bottom: 2px solid transparent;
   transition: all 0.3s;
 }
-
 .btn-link:hover {
   border-color: var(--couleur-accent);
   color: var(--couleur-accent);
@@ -123,97 +143,134 @@
 
 /* --- CÔTÉ DROIT (IMAGE) --- */
 .split-right {
-  flex: 1; /* 50% de largeur */
+  /* AVANT : flex: 1; (50%) */
+  /* MAINTENANT : Prend moins de place (40%) */
+  flex: 1;
+
   position: relative;
-  background-color: #000;
-  overflow: hidden;
+  background-color: transparent;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+
+  /* On aligne l'image à GAUCHE dans son conteneur pour laisser le vide à DROITE */
+  justify-content: flex-start;
+
+  /* On garde le padding pour que ça respire */
+  padding: 20px;
+  /* Mais on peut ajouter un margin-right pour forcer l'espace vide */
+  margin-right: 5%; /* Ajuste ce % selon la taille du vide que tu veux */
 }
 
 .image-mask {
-  width: 100%;
-  height: 100%;
+  /* RETOUR AU GRAND FORMAT */
+  width: 100%; /* Prend toute la largeur disponible */
+  height: 100%; /* Prend toute la hauteur disponible */
+
+  /* On enlève la contrainte de ratio pour qu'elle remplisse tout le bloc */
+  /* aspect-ratio: 3/4;  <-- ON ENLÈVE ÇA */
+  max-width: 100%; /* <-- ON ENLÈVE LA LIMITE DE 550px */
+
+  border-radius: 30px;
+
+  /* C'EST ICI QUE LA MAGIE OPÈRE : */
+  /* Tout ce qui est dedans (image + ticker) sera coupé aux bords arrondis */
+  overflow: hidden;
+  position: relative; /* Important pour placer le ticker dedans */
+
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 
 .cover-img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* L'image remplit tout le bloc sans se déformer */
-  opacity: 0.8; /* Légèrement sombre pour faire ressortir le ticker */
-  filter: grayscale(100%); /* Optionnel : Noir et blanc pour le style */
+  /* Object-fit: cover est CRUCIAL. */
+  /* Il va zoomer l'image pour qu'elle remplisse tout sans être déformée/écrasée */
+  object-fit: cover;
+  opacity: 0.9;
+  filter: grayscale(100%);
   transition: filter 0.5s ease, transform 0.5s ease;
 }
 
-/* Au survol de la droite, l'image reprend ses couleurs */
 .split-right:hover .cover-img {
   filter: grayscale(0%);
   transform: scale(1.05);
 }
 
-/* --- BANDE DÉFILANTE (TICKER) --- */
+/* --- TICKER (BANDEAU INTÉRIEUR) --- */
 .ticker-wrap {
   position: absolute;
-  bottom: 10%;
-  left: -10%; /* Déborde un peu */
-  width: 120%;
+  bottom: 40px;
+  left: -10%;
+  width: 120%; /* Plus large pour couvrir la rotation */
   background-color: var(--couleur-accent);
-  transform: rotate(-5deg); /* Incliné pour le style dynamique */
+  transform: rotate(-5deg);
   overflow: hidden;
-  padding: 15px 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  padding: 12px 0;
   border-top: 2px solid #fff;
   border-bottom: 2px solid #fff;
+  z-index: 10;
+  pointer-events: none;
+
+  /* IMPORTANT : On utilise Flexbox ici pour mettre les deux .ticker côte à côte */
+  display: flex;
 }
 
+/* .ticker devient un conteneur qui défile */
 .ticker {
   display: flex;
-  white-space: nowrap; /* Empêche le retour à la ligne */
-  animation: ticker 10s linear infinite; /* Animation continue */
+  white-space: nowrap;
+  /* L'animation s'applique à chacun des deux blocs .ticker */
+  /* Ajuste la durée (20s) pour la vitesse */
+  animation: ticker 20s linear infinite;
+  /* Astuce : On force l'accélération matérielle pour la fluidité */
+  will-change: transform;
 }
 
 .ticker__item {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 900;
   color: #fff;
-  padding: 0 30px;
+  padding: 0 30px; /* Espace entre les mots */
   text-transform: uppercase;
 }
 
+/* L'animation magique : on déplace de -100% de la largeur d'UN bloc ticker */
 @keyframes ticker {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
-  } /* Défile de la moitié (la longueur du contenu dupliqué) */
+    transform: translateX(-100%);
+  }
 }
 
-/* --- RESPONSIVE --- */
+/* --- RESPONSIVE MOBILE --- */
 @media (max-width: 900px) {
   .accueil-container.full-width {
-    flex-direction: column-reverse; /* Image en haut, texte en bas sur mobile */
-    height: auto;
+    flex-direction: column-reverse;
+    height: auto; /* Sur mobile on laisse le scroll naturel */
+    overflow: visible;
   }
 
   .split-left {
     padding: 40px 20px;
     text-align: center;
   }
-
   .content-wrapper {
-    align-items: center; /* Centre le texte sur mobile */
-  }
-
-  .big-title {
-    font-size: 3.5rem;
+    align-items: center;
   }
 
   .split-right {
-    height: 400px; /* Hauteur fixe pour l'image sur mobile */
+    height: 400px;
+    padding: 20px;
+    overflow: hidden; /* Sur mobile on coupe pour pas que ça déborde de l'écran */
   }
 
   .ticker-wrap {
-    bottom: 20px;
-    transform: rotate(0deg); /* Droit sur mobile */
+    bottom: 30px;
+    transform: rotate(0deg);
     width: 100%;
     left: 0;
   }

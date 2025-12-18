@@ -1,296 +1,223 @@
 /* src/assets/css/Projects.css */
 
+/* --- VARIABLES --- */
+:root {
+  /* DARK MODE : Le gris sombre que tu aimes */
+  --card-bg: var(--couleur-fond-composant);
+  --card-border: rgba(255, 255, 255, 0.08);
+
+  --modal-bg: var(--couleur-fond-composant);
+  --text-primary: #fff;
+  --text-secondary: #aaa;
+
+  /* Ombres */
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* LIGHT MODE */
+[data-theme="light"] {
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.1);
+
+  --modal-bg: #ffffff;
+  --text-primary: #000;
+  --text-secondary: #555;
+  --couleur-texte-principal: #000;
+
+  --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.2);
+}
+
 .projects-page-container {
-  /* AVANT : 1200px ou 1400px */
-  max-width: 1500px;
-
-  margin: 40px auto;
+  max-width: 1600px;
+  margin: 60px auto;
   padding: 0 40px;
+  margin-bottom: 100px;
 }
 
-/* --- EN-TÊTE --- */
-.projects-header {
+.projects-title {
+  font-size: clamp(3rem, 5vw, 4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 60px;
+  color: var(--couleur-texte-principal);
+  letter-spacing: -2px;
   text-align: center;
-  margin-bottom: 50px;
-  position: relative; /* Pour le menu déroulant */
-  z-index: 10;
 }
-
-.projects-header h1 {
-  font-size: 3rem;
+.projects-title::after {
+  content: ".";
   color: var(--couleur-accent);
-  margin-bottom: 10px;
 }
 
-.projects-header p {
-  color: var(--couleur-texte-principal);
-  opacity: 0.8;
-  margin-bottom: 30px;
-}
-
-/* --- LE SYSTÈME DE FILTRE (Nouveau) --- */
-.filter-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.filter-toggle-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: transparent;
-  border: 2px solid var(--couleur-texte-principal);
-  color: var(--couleur-texte-principal);
-  padding: 10px 30px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-}
-
-.filter-toggle-btn:hover,
-.filter-toggle-btn.active {
-  background-color: var(--couleur-accent);
-  border-color: var(--couleur-accent);
-  color: var(--couleur-fond);
-}
-
-/* Le Menu Déroulant */
-.filter-dropdown {
-  position: absolute;
-  top: 120%; /* Juste en dessous du bouton */
-  left: 50%;
-  transform: translateX(-50%) translateY(-10px);
-  width: 250px;
-
-  background-color: var(--couleur-fond-composant);
-  border: 1px solid var(--couleur-texte-principal);
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  padding: 15px;
-
-  /* Animation d'ouverture */
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
-
-.filter-dropdown.open {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
-
-.filter-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* Les options du filtre */
-.filter-option {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--couleur-texte-principal);
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s;
-  text-align: left;
-}
-
-.filter-option:hover {
-  background-color: rgba(128, 128, 128, 0.1);
-}
-
-.filter-option.selected {
-  background-color: var(--couleur-accent);
-  color: var(--couleur-fond);
-  font-weight: bold;
-}
-
-.clear-filters {
-  margin-top: 15px;
-  width: 100%;
-  background: transparent;
-  border: none;
-  border-top: 1px solid rgba(128, 128, 128, 0.3);
-  color: var(--couleur-texte-principal);
-  padding-top: 10px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  opacity: 0.7;
-}
-.clear-filters:hover {
-  opacity: 1;
-  text-decoration: underline;
-}
-
-/* --- GRILLE XL (Bigger Cards) --- */
+/* --- GRILLE --- */
 .projects-grid {
   display: grid;
-  /* ICI LA MODIF : on passe de 300px à 450px min */
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-  gap: 50px; /* Plus d'espace entre les grosses cartes */
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  gap: 50px;
 }
 
+/* --- CARTE PROJET --- */
 .project-card {
-  background-color: var(--couleur-fond-composant);
-  border-radius: 20px; /* Arrondi un peu plus grand */
+  /* 1. FOND GRIS SIMPLE (Pas de quadrillage) */
+  background-color: var(--card-bg);
+
+  /* Bordure discrète par défaut */
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease;
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--card-shadow);
 }
 
+/* --- LE HOVER MAGIQUE QUE TU VEUX --- */
 .project-card:hover {
   transform: translateY(-8px);
+  /* 2. LA BORDURE DEVIENT ROUGE */
+  border-color: var(--couleur-accent);
+  box-shadow: var(--card-shadow-hover);
 }
 
-/* Image plus grande */
-.card-image {
-  height: 300px; /* Beaucoup plus haut (avant 200px) */
+.card-image-wrapper {
+  height: 300px;
   overflow: hidden;
-  cursor: pointer;
+  border-bottom: 1px solid var(--card-border);
 }
 
-.card-image img {
+.project-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
+  /* Image naturelle */
 }
 
-.project-card:hover .card-image img {
+.project-card:hover .project-img {
   transform: scale(1.05);
 }
 
 .card-content {
-  padding: 30px; /* Plus d'espace intérieur */
+  padding: 30px;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
 
-.card-content h3 {
-  margin: 0 0 15px 0;
+.card-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 10px;
   color: var(--couleur-texte-principal);
-  font-size: 1.8rem; /* Titre plus gros */
 }
 
+.card-desc {
+  font-size: 1rem;
+  color: var(--couleur-texte-principal);
+  opacity: 0.8;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+/* --- TAGS (Style Pillule) --- */
 .card-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 25px;
+  margin-bottom: auto;
 }
 
 .tag {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   padding: 6px 14px;
-  border-radius: 20px;
-  background-color: var(--couleur-fond);
+  border-radius: 50px;
+
+  background-color: #000;
   color: var(--couleur-accent);
   border: 1px solid var(--couleur-accent);
-  font-weight: bold;
+
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-.full-width {
-  width: 100%;
-  margin-top: auto;
+[data-theme="light"] .tag {
+  background-color: #fff;
 }
 
-.btn-link {
+/* 3. LES TAGS DEVIENNENT ROUGES QUAND ON SURVOLE LA CARTE */
+.project-card:hover .tag {
+  background-color: var(--couleur-accent);
+  color: #fff; /* Texte blanc */
+}
+
+/* --- BOUTON DU BAS (Lien & Infos) --- */
+.card-footer {
+  margin-top: 25px;
+}
+
+.card-btn-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
+  width: 100%;
   padding: 12px;
   border-radius: 10px;
   font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+
+  background: transparent;
   border: 1px solid var(--couleur-accent);
   color: var(--couleur-accent);
-  background: transparent;
-  font-size: 1.1rem;
 }
 
-.btn-link:hover {
+/* 4. LE BOUTON DU BAS DEVIENT ROUGE AUSSI */
+.project-card:hover .card-btn-link {
   background-color: var(--couleur-accent);
-  color: var(--couleur-fond);
+  color: #fff;
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 900px) {
-  /* Sur mobile, 450px c'est trop large, ça dépasse l'écran */
-  .projects-grid {
-    /* On repasse en 1 colonne qui prend toute la largeur */
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .card-image {
-    height: 220px; /* On réduit la hauteur image sur mobile */
-  }
-
-  .projects-header h1 {
-    font-size: 2.5rem;
-  }
-}
-/* --- LA MODALE (POP-UP) - LE CODE MANQUANT --- */
+/* --- MODALE (POP-UP) --- */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-
-  /* Fond sombre semi-transparent */
-  background-color: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px); /* Flou d'arrière plan */
-
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
-
-  /* Z-INDEX TRÈS HAUT pour passer au-dessus du Header */
   z-index: 9999;
-
   padding: 20px;
-  animation: fadeIn 0.3s ease;
 }
 
 .modal-content {
-  /* Utilise bien la variable de fond du composant */
-  background-color: var(--couleur-fond-composant);
-  color: var(--couleur-texte-principal); /* Force la couleur du texte */
-
+  background-color: var(--modal-bg);
   width: 100%;
-  max-width: 700px; /* Un peu plus large */
-  border-radius: 15px;
+  max-width: 800px;
+  border-radius: 20px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  animation: slideUp 0.3s ease;
-
-  /* Gestion du scroll si l'écran est petit */
-  max-height: 90vh;
-  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--card-border);
 }
 
-.modal-close {
+.modal-close-btn {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 20px;
+  right: 20px;
   background: rgba(0, 0, 0, 0.6);
-  color: white;
   border: none;
+  color: #fff;
+  font-size: 1.2rem;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -298,141 +225,114 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
   transition: background 0.3s;
-  z-index: 10; /* Pour être cliquable par dessus l'image */
 }
-.modal-close:hover {
+.modal-close-btn:hover {
   background: var(--couleur-accent);
 }
 
-.modal-image {
+.modal-image-container {
   width: 100%;
-  height: 300px; /* Hauteur fixe */
+  height: 350px;
+  background-color: #000;
+}
+.modal-image-container img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
-.modal-text {
-  padding: 30px;
+.modal-body {
+  padding: 40px;
+  color: var(--couleur-texte-principal);
 }
 
-.modal-text h2 {
+.modal-title {
+  font-size: 2.5rem;
   color: var(--couleur-accent);
-  margin-top: 0;
-  font-size: 2rem;
+  margin-bottom: 15px;
 }
 
 .modal-tags {
   display: flex;
-  flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
-.modal-text h3 {
+.modal-tag-pill {
+  background: transparent;
+  border: 1px solid var(--couleur-accent);
   color: var(--couleur-texte-principal);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.modal-subtitle {
   font-size: 1.1rem;
-  margin-bottom: 10px;
-  border-bottom: 1px solid var(--couleur-texte-secondaire);
-  display: inline-block;
-}
-
-.modal-text p {
   color: var(--couleur-texte-principal);
-  line-height: 1.6;
-  margin-bottom: 30px;
+  opacity: 0.6;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
 }
 
-/* --- LES BOUTONS DE LA MODALE --- */
+.modal-description {
+  color: var(--couleur-texte-principal);
+  line-height: 1.8;
+  margin-bottom: 40px;
+  font-size: 1.05rem;
+}
+
 .modal-actions {
   display: flex;
-  gap: 15px;
-  flex-wrap: wrap; /* Pour mobile */
+  gap: 20px;
 }
 
 .btn-modal {
-  flex: 1; /* Ils prennent la même largeur */
-  display: inline-flex;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 12px 20px;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: transform 0.2s, background 0.3s;
-  white-space: nowrap;
+  transition: transform 0.2s ease;
+  flex: 1;
 }
 
-.btn-modal:hover {
+.btn-primary {
+  background-color: var(--couleur-accent);
+  color: #fff;
+}
+.btn-primary:hover {
+  filter: brightness(1.1);
   transform: translateY(-2px);
 }
 
-/* Bouton Primaire (Site) */
-.btn-modal.primary {
-  background-color: var(--couleur-accent);
-  color: var(--couleur-fond);
-  border: 2px solid var(--couleur-accent);
-}
-.btn-modal.primary:hover {
-  background-color: var(--couleur-accent-hover);
-  border-color: var(--couleur-accent-hover);
-}
-
-/* Bouton Secondaire (GitHub) - Style Outline */
-.btn-modal.secondary {
+.btn-secondary {
   background-color: transparent;
-  color: var(--couleur-texte-principal);
   border: 2px solid var(--couleur-texte-principal);
+  color: var(--couleur-texte-principal);
 }
-.btn-modal.secondary:hover {
+.btn-secondary:hover {
   background-color: var(--couleur-texte-principal);
-  color: var(--couleur-fond-composant);
+  color: var(--couleur-fond);
+  transform: translateY(-2px);
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
   }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes slideUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Responsive Modale */
-@media (max-width: 768px) {
-  .modal-content {
-    max-height: 85vh; /* Plus de place sur mobile */
-  }
-
-  .modal-image {
-    height: 200px; /* Image plus petite sur mobile */
-  }
-
-  .modal-text {
-    padding: 20px;
-  }
-
-  .modal-text h2 {
-    font-size: 1.5rem;
-  }
-
-  /* Boutons l'un sous l'autre sur mobile */
   .modal-actions {
     flex-direction: column;
   }
-
-  .btn-modal {
-    width: 100%; /* Pleine largeur */
+  .projects-page-container {
+    padding: 0 20px;
   }
 }
