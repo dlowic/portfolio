@@ -1,282 +1,316 @@
 /* src/assets/css/APropos.css */
 
 .apropos-page-container {
-  /* AVANT : 1200px */
-  /* APRÈS : 1500px (ou 1600px si tu veux encore plus large) */
   max-width: 1500px;
-
-  margin: 40px auto;
-
-  /* J'augmente un peu le padding sur les côtés pour que ça ne colle pas trop aux bords sur les écrans moyens */
+  margin: 60px auto;
   padding: 0 40px;
-
-  padding-bottom: 50px;
+  padding-bottom: 100px;
 }
 
 /* --- LA GRILLE BENTO --- */
 .bento-grid {
   display: grid;
-  /* 3 colonnes égales sur PC */
   grid-template-columns: repeat(3, 1fr);
-  /* Hauteur auto */
-  grid-auto-rows: minmax(200px, auto);
-  gap: 20px;
+  /* 3 rangées : la dernière fait 220px de haut pour le gros Dock */
+  grid-template-rows: auto auto 220px;
+  gap: 30px;
 }
 
 /* --- STYLE DES CARTES --- */
 .bento-item {
   background-color: var(--couleur-fond-composant);
-  border-radius: 25px;
-  padding: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
-    box-shadow 0.3s ease;
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   position: relative;
   overflow: hidden;
 }
 
 .bento-item:hover {
-  transform: scale(1.02);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  border-color: var(--couleur-accent);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   z-index: 2;
 }
 
 .bento-item h2 {
   color: var(--couleur-accent);
   margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 1.8rem;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -1px;
 }
 
 .bento-item p {
   color: var(--couleur-texte-principal);
   font-size: 1.05rem;
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: 15px;
 }
 
-/* --- PLACEMENT GRID (Le plus important) --- */
+.highlight,
+strong {
+  color: #fff;
+  font-weight: bold;
+}
 
-/* 1. BIO (Haut Gauche - 2 colonnes) */
+/* --- PLACEMENT GRID --- */
 .item-bio {
   grid-column: 1 / 3;
   grid-row: 1;
 }
-
-/* 2. SKILLS (Tour Droite - 1 colonne, 2 étages) */
 .item-skills {
   grid-column: 3 / 4;
-  grid-row: 1 / 3; /* Prend toute la hauteur */
-  justify-content: flex-start;
+  grid-row: 1 / 3;
 }
-
-/* 3. DISPONIBILITÉ (Bas Gauche - 1 colonne) */
 .item-avail {
   grid-column: 1 / 2;
   grid-row: 2;
-  border: 2px solid var(--couleur-accent);
-  scroll-margin-top: 150px;
+  justify-content: center;
 }
-
-/* 4. TIMELINE (Bas Milieu - 1 colonne) */
 .item-timeline {
   grid-column: 2 / 3;
   grid-row: 2;
-  justify-content: flex-start;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--couleur-accent) transparent;
 }
 
-/* 5. LOGOS (Tout en bas - 3 colonnes) */
+/* 5. CARTE LOGOS (La fameuse carte du bas) */
 .item-logos {
-  grid-column: 1 / -1;
+  grid-column: 1 / -1; /* Toute la largeur */
   grid-row: 3;
-  padding: 0;
-  background-color: transparent;
-  box-shadow: none;
-  border: 1px solid var(--couleur-texte-secondaire);
-  height: 120px;
-}
-.item-logos:hover {
-  transform: scale(1.01);
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: visible !important; /* CRUCIAL pour que les icônes grossissent */
 }
 
-/* --- STYLES INTERNES --- */
-
-/* Timeline */
-.timeline-container {
-  position: relative;
-  padding-left: 20px;
-  margin-top: 10px;
-}
-.timeline-container::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 5px;
-  bottom: 5px;
-  width: 2px;
-  background-color: var(--couleur-accent);
-  opacity: 0.3;
-}
-.timeline-item {
-  position: relative;
-  margin-bottom: 30px;
-}
-.timeline-dot {
-  position: absolute;
-  left: -24px;
-  top: 5px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: var(--couleur-accent);
-}
-.timeline-content h3 {
-  color: var(--couleur-accent);
-  margin: 0;
-  margin-bottom: 5px;
-  font-size: 1.1rem;
-}
-.timeline-content p {
-  margin: 0;
-  font-size: 0.95rem;
-  color: var(--couleur-texte-principal);
-}
-.timeline-desc {
-  margin-top: 8px !important;
-  font-size: 0.85rem !important;
-  color: var(--couleur-texte-secondaire) !important;
-  line-height: 1.4;
-  font-style: italic;
-}
-
-/* Skills */
-.skills-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  height: 100%;
+/* --- CONTENU INTERNE --- */
+.skill-group {
+  margin-bottom: 25px;
 }
 .skill-group h3 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--couleur-texte-principal);
-  margin-bottom: 10px;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
-  padding-bottom: 5px;
-  display: inline-block;
+  opacity: 0.7;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 .skill-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 .skill-badge {
   font-size: 0.85rem;
-  padding: 6px 12px;
-  border-radius: 8px;
-  background-color: rgba(128, 128, 128, 0.1);
-  border: 1px solid var(--couleur-texte-secondaire);
-  color: var(--couleur-texte-principal);
-  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 50px;
+  background-color: #000;
+  color: var(--couleur-accent);
+  border: 1px solid var(--couleur-accent);
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 .skill-badge:hover {
   background-color: var(--couleur-accent);
-  color: var(--couleur-fond);
-  border-color: var(--couleur-accent);
-  transform: translateY(-2px);
+  color: #fff;
+  cursor: default;
 }
 
-/* Status */
 .status-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  text-align: center;
 }
-.status-line {
+.status-header {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 15px;
-  font-weight: bold;
-  font-size: 1.1rem !important;
-  flex-wrap: nowrap;
+  margin-bottom: 15px;
 }
-.status-details {
-  margin-top: 15px !important;
-  font-size: 0.95rem !important;
-  opacity: 0.8;
-  line-height: 1.6;
+.status-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
 }
 .status-dot {
-  width: 12px;
-  height: 12px;
+  width: 15px;
+  height: 15px;
   background-color: #28a745;
   border-radius: 50%;
-  position: relative;
-  flex-shrink: 0;
-  z-index: 1;
+  animation: pulse 2s infinite;
 }
-.status-dot::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: inherit;
-  z-index: -1;
-  transform: translate(-50%, -50%) scale(1);
-  animation: pulse-responsive 2s infinite ease-out;
-}
-@keyframes pulse-responsive {
+@keyframes pulse {
   0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.7;
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(40, 167, 69, 0);
   }
   100% {
-    transform: translate(-50%, -50%) scale(3);
-    opacity: 0;
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
   }
 }
+.date-highlight {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 15px;
+  background: rgba(239, 96, 107, 0.1);
+  color: var(--couleur-accent);
+  border-radius: 8px;
+  font-weight: bold;
+}
 
-/* Logo Loop */
-.logo-loop-wrapper {
+.timeline-container {
+  position: relative;
+  padding-left: 20px;
+  border-left: 2px solid rgba(128, 128, 128, 0.2);
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+  padding-left: 20px;
+}
+.timeline-dot {
+  position: absolute;
+  left: -26px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--couleur-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--couleur-accent);
+}
+.timeline-content h3 {
+  color: var(--couleur-accent);
+  font-size: 1.1rem;
+  margin: 0;
+}
+.timeline-content h4 {
+  color: #fff;
+  margin: 5px 0;
+  font-size: 1rem;
+}
+.timeline-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* --- STYLE DU DOCK MAGNÉTIQUE (GROS & CLASSE) --- */
+.dock-wrapper-center {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.dock-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px; /* Espace large */
+  padding: 10px;
+  height: 100px;
+}
+
+.dock-icon-wrapper {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: width;
+}
+
+.dock-link {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
-  overflow: hidden;
+  justify-content: center;
+  text-decoration: none;
 }
 
-/* --- RESPONSIVE MOBILE --- */
-@media (max-width: 900px) {
+.dock-icon-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px; /* Forme "Squircle" */
+  background-color: #111; /* Fond très sombre */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--couleur-texte-principal);
+  font-size: 2.5rem; /* --- ICÔNES TRÈS GROSSES --- */
+
+  transition: all 0.2s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover individuel */
+.dock-icon-wrapper:hover .dock-icon-inner {
+  background-color: var(--couleur-accent);
+  border-color: var(--couleur-accent);
+  color: #fff;
+  box-shadow: 0 0 25px rgba(239, 96, 107, 0.6);
+  transform: translateY(-10px);
+}
+
+.dock-icon-inner svg {
+  width: 55%;
+  height: 55%;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .item-bio {
+    grid-column: 1 / -1;
+  }
+  .item-skills {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .item-avail {
+    grid-column: 1 / 2;
+  }
+  .item-timeline {
+    grid-column: 2 / 3;
+  }
+  .item-logos {
+    grid-column: 1 / -1;
+    height: auto;
+    padding: 40px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .apropos-page-container {
+    padding: 0 20px;
+  }
   .bento-grid {
     display: flex;
     flex-direction: column;
-    gap: 20px;
   }
-  .bento-item {
-    transform: none !important;
+
+  .dock-container {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
   }
-  .item-timeline {
-    overflow: visible;
-  }
-  .item-logos {
-    height: 100px;
-    order: 5;
-  }
-  .status-line {
-    font-size: 1rem !important;
-    align-items: flex-start;
-    padding-top: 5px;
-  }
-  .status-line .status-dot {
-    margin-top: 5px;
+  .dock-icon-wrapper {
+    width: 60px !important;
+    margin-bottom: 10px;
   }
 }

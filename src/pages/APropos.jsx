@@ -1,9 +1,13 @@
 // src/pages/APropos.jsx
-
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import "../assets/css/APropos.css";
-import LogoLoop from "../components/LogoLoop.jsx";
+
+// ⚠️ C'EST ICI LE CHANGEMENT PRINCIPAL :
+import TechDock from "../components/TechDock.jsx";
+
+// Import des icônes
 import {
   SiReact,
   SiJavascript,
@@ -15,7 +19,7 @@ import {
   SiVite,
 } from "react-icons/si";
 
-// --- DONNÉES ---
+// Données des icônes pour le Dock
 const techLogos = [
   { node: <SiReact />, title: "React", href: "https://react.dev" },
   { node: <SiJavascript />, title: "JavaScript", href: "#" },
@@ -35,7 +39,7 @@ const skillsData = [
       "JavaScript (ES6+)",
       "HTML5 / CSS3",
       "Tailwind CSS",
-      "Animations",
+      "Framer Motion",
     ],
   },
   {
@@ -46,63 +50,76 @@ const skillsData = [
     category: "Design & UI/UX",
     items: [
       "Figma",
-      "Maquettage",
+      "Maquettage UI",
       "Adobe Photoshop",
-      "Responsive Design",
+      "Responsive",
       "Accessibilité",
     ],
   },
 ];
 
+// Animation d'entrée
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
 function APropos() {
   const { hash } = useLocation();
 
   useEffect(() => {
-    const scrollToSection = () => {
+    if (hash) {
       const id = hash.replace("#", "");
-      if (!id) return;
       const element = document.getElementById(id);
       if (element) {
         element.scrollIntoView({ behavior: "smooth", block: "center" });
       }
-    };
-
-    if (hash) {
-      scrollToSection();
-      setTimeout(scrollToSection, 100);
-      setTimeout(scrollToSection, 500);
-    } else {
-      window.scrollTo(0, 0);
     }
   }, [hash]);
 
   return (
     <div className="apropos-page-container">
-      <div className="bento-grid">
-        {/* --- 1. BIO (Grande carte en haut à gauche) --- */}
-        <div className="bento-item item-bio">
+      <motion.div
+        className="bento-grid"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* --- 1. BIO --- */}
+        <motion.div className="bento-item item-bio" variants={itemVariants}>
           <h2>À Propos de Moi</h2>
-          <p>
-            Je suis Loic Digbeu, étudiant en{" "}
-            <strong>BUT MMI (Métiers du Multimédia et de l'Internet)</strong>,
-            actuellement en deuxième année avec une spécialisation en{" "}
-            <strong>Développement Web</strong>.
-          </p>
-          <p>
-            Mon profil est hybride : je comprends les enjeux du design et je
-            maîtrise la logique du code. Cette double compétence me permet de
-            dialoguer efficacement avec les designers tout en produisant un code
-            propre et performant.
-          </p>
-          <p>
-            Actuellement, je me focalise sur l'écosystème <strong>React</strong>{" "}
-            pour créer des interfaces utilisateur modernes, fluides et
-            engageantes.
-          </p>
-        </div>
+          <div className="bio-content">
+            <p>
+              Je suis <strong>Loic Digbeu</strong>, étudiant en{" "}
+              <span className="highlight">BUT MMI</span>, actuellement en
+              deuxième année avec une spécialisation en{" "}
+              <span className="highlight">Développement Web</span>.
+            </p>
+            <p>
+              Mon profil est hybride : je comprends les enjeux du{" "}
+              <strong>design</strong> et je maîtrise la logique du{" "}
+              <strong>code</strong>. Cette double compétence me permet de
+              dialoguer efficacement avec les designers tout en produisant un
+              code propre et performant.
+            </p>
+            <p>
+              Actuellement, je me focalise sur l'écosystème{" "}
+              <strong>React</strong> pour créer des expériences digitales
+              immersives.
+            </p>
+          </div>
+        </motion.div>
 
-        {/* --- 2. COMPÉTENCES (Grande tour verticale à droite) --- */}
-        <div className="bento-item item-skills">
+        {/* --- 2. COMPÉTENCES --- */}
+        <motion.div className="bento-item item-skills" variants={itemVariants}>
           <h2>Arsenal Technique</h2>
           <div className="skills-grid">
             {skillsData.map((group, index) => (
@@ -118,81 +135,63 @@ function APropos() {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* --- 3. DISPONIBILITÉ (Petit carré en bas à gauche) --- */}
-        <div className="bento-item item-avail" id="disponibilite">
+        {/* --- 3. DISPONIBILITÉ --- */}
+        <motion.div
+          className="bento-item item-avail"
+          id="disponibilite"
+          variants={itemVariants}
+        >
           <h2>Disponibilité</h2>
           <div className="status-container">
-            <p className="status-line">
+            <div className="status-header">
               <span className="status-dot"></span>
-              En recherche de stage
-            </p>
+              <span className="status-text">En recherche de stage</span>
+            </div>
             <p className="status-details">
-              Je recherche un stage de <strong>10 à 12 semaines</strong> en
-              développement Front-end ou Fullstack JS.
+              Je recherche un stage de <strong>10 à 12 semaines</strong>.
               <br />
-              <br />
-              <strong>Période :</strong> Mai à Juillet 2026.
+              <span className="date-highlight">Mai à Juillet 2026</span>
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        {/* --- 4. PARCOURS (Petit carré en bas au milieu) --- */}
-        <div className="bento-item item-timeline">
+        {/* --- 4. PARCOURS --- */}
+        <motion.div
+          className="bento-item item-timeline"
+          variants={itemVariants}
+        >
           <h2>Mon Parcours</h2>
           <div className="timeline-container">
-            {/* Item 1 : BUT */}
             <div className="timeline-item">
               <div className="timeline-dot"></div>
               <div className="timeline-content">
                 <h3>2023 - 2027</h3>
-                <p>
-                  <strong>
-                    BUT MMI (Mérier du Multimédia et de l'Internet)
-                  </strong>
-                  <br />
-                  <em>IUT de Bobigny</em>
-                </p>
-                <p className="timeline-desc">
-                  Formation polyvalente sur 3 ans : Dev Web, Design et Com.
-                </p>
+                <h4>BUT MMI</h4>
+                <p>IUT de Bobigny - Spé. Dev Web</p>
               </div>
             </div>
-
-            {/* Item 2 : Bac */}
             <div className="timeline-item">
               <div className="timeline-dot"></div>
               <div className="timeline-content">
                 <h3>2023</h3>
-                <p>
-                  <strong>Baccalauréat</strong>
-                  <br />
-                  <em>Lycée Langevin Wallon</em>
-                </p>
-                <p className="timeline-desc">
-                  Obtention du diplôme avec mention.
-                </p>
+                <h4>Baccalauréat</h4>
+                <p>Lycée Langevin Wallon - Mention</p>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* --- 5. LOGOS (Barre tout en bas) --- */}
-        <div className="bento-item item-logos">
-          <div className="logo-loop-wrapper">
-            <LogoLoop
-              logos={techLogos}
-              speed={100}
-              direction="left"
-              logoHeight={45}
-              gap={50}
-              hoverSpeed={0}
-              scaleOnHover
-            />
+        {/* --- 5. LOGOS (C'est ici que ça change !) --- */}
+        <motion.div className="bento-item item-logos" variants={itemVariants}>
+          {/* Si tu vois "Stack Technique", c'est que le nouveau code est actif ! */}
+          <h2>Stack Technique</h2>
+          <div className="dock-wrapper-center">
+            <TechDock logos={techLogos} />
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
