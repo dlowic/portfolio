@@ -1,30 +1,36 @@
 /* src/assets/css/Contact.css */
 
 .contact-page-container {
-  /* On aligne le conteneur global sur 1500px */
-  max-width: 1500px;
-  margin: 40px auto;
+  max-width: 1000px; /* Largeur idéale pour une lecture verticale */
+  margin: 60px auto;
   padding: 0 40px;
-  margin-bottom: 60px;
+  margin-bottom: 100px;
 
-  /* On centre les cartes à l'intérieur */
+  /* On empile tout verticalement */
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 30px; /* Espace entre la carte CV et le formulaire */
 }
 
-/* --- STYLE DES CARTES --- */
+/* --- STYLE GÉNÉRAL DES CARTES --- */
 .contact-card {
-  /* On limite la largeur de la carte pour la lisibilité */
-  width: 100%;
-  max-width: 900px; /* Le formulaire ne dépassera pas ça */
-
+  width: 100%; /* Prend toute la largeur du conteneur */
+  
   background-color: var(--couleur-fond-composant);
-  border-radius: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  border-radius: 20px;
   padding: 40px;
-  margin-bottom: 30px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--couleur-accent);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .contact-card h2,
@@ -32,15 +38,99 @@
   color: var(--couleur-accent);
   margin-top: 0;
   margin-bottom: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
 }
 
+/* --- BLOC CV (Style Barre Horizontale) --- */
+.cv-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Texte à gauche, boutons à droite */
+  flex-wrap: wrap; /* Pour passer à la ligne sur mobile */
+  gap: 20px;
+  padding: 30px 40px; /* Un peu plus compact */
+}
+
+.cv-content h3 {
+  margin-bottom: 5px;
+  font-size: 1.4rem;
+}
+.cv-content p {
+  margin: 0;
+  color: var(--couleur-texte-principal);
+  opacity: 0.8;
+}
+
+.cv-actions-row {
+  display: flex;
+  gap: 15px;
+}
+
+/* --- BOUTONS CV --- */
+/* Bouton Voir (Plein) */
+.btn-cv-view {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  
+  background-color: var(--couleur-accent);
+  color: #fff;
+  border: 2px solid var(--couleur-accent);
+  transition: all 0.3s ease;
+}
+.btn-cv-view:hover {
+  background-color: transparent;
+  color: var(--couleur-accent);
+  transform: translateY(-2px);
+}
+
+/* Bouton Télécharger (Contour) */
+.btn-cv-download-simple {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  
+  background-color: transparent;
+  color: var(--couleur-texte-principal);
+  border: 2px solid rgba(128, 128, 128, 0.3);
+  transition: all 0.3s ease;
+}
+.btn-cv-download-simple:hover {
+  border-color: var(--couleur-accent);
+  color: var(--couleur-accent);
+  transform: translateY(-2px);
+}
+
+
+/* --- FORMULAIRE --- */
 .contact-intro {
   color: var(--couleur-texte-principal);
   margin-bottom: 30px;
   line-height: 1.6;
+  opacity: 0.9;
 }
 
-/* --- STYLE DU FORMULAIRE --- */
+/* Mise en page du formulaire (Nom et Email sur la même ligne si possible) */
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+.half {
+  flex: 1;
+}
+
 .form-group {
   margin-bottom: 20px;
 }
@@ -50,126 +140,82 @@
   margin-bottom: 8px;
   font-weight: bold;
   color: var(--couleur-texte-principal);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 12px 15px;
-  border-radius: 8px; /* Coins un peu arrondis */
-
-  /* STYLE DES INPUTS : Transparent avec bordure */
-  background-color: transparent;
-  border: 2px solid var(--couleur-texte-principal); /* Bordure visible */
+  padding: 15px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(128, 128, 128, 0.3);
   color: var(--couleur-texte-principal);
-
   font-size: 1rem;
   font-family: inherit;
   transition: all 0.3s ease;
 }
 
-/* Au focus (quand on clique dedans) */
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--couleur-accent); /* La bordure devient rouge Grimm */
-  box-shadow: 0 0 10px rgba(239, 96, 107, 0.2); /* Petite lueur */
+  border-color: var(--couleur-accent);
+  background-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 15px rgba(239, 96, 107, 0.1);
 }
 
-/* Placeholder (le texte gris "Votre Nom") */
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: var(--couleur-texte-principal);
-  opacity: 0.5;
-}
-
-/* Bouton d'envoi */
 .submit-btn {
-  /* Mise en page */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   cursor: pointer;
-
-  /* ESTHÉTIQUE (Ce qui manquait) */
-  padding: 12px 30px;
-  font-size: 1rem;
+  width: 100%;
+  padding: 15px 30px;
+  font-size: 1.1rem;
   font-weight: bold;
   text-transform: uppercase;
-  border-radius: 10px; /* Même arrondi que tes inputs */
-
-  /* Couleurs : On le met en Rouge (Accent) par défaut car c'est l'action principale */
+  border-radius: 10px;
   background-color: var(--couleur-accent);
-  color: var(
-    --couleur-fond
-  ); /* Le texte prend la couleur du fond pour le contraste */
+  color: #fff;
   border: 2px solid var(--couleur-accent);
-
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(239, 96, 107, 0.3); /* Petite ombre rouge */
+  box-shadow: 0 4px 15px rgba(239, 96, 107, 0.3);
 }
 
-/* Effet au survol */
 .submit-btn:hover {
-  background-color: transparent; /* Devient transparent */
-  color: var(--couleur-accent); /* Le texte devient rouge */
-  transform: translateY(-2px); /* Il monte un peu */
+  background-color: transparent;
+  color: var(--couleur-accent);
+  transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(239, 96, 107, 0.5);
 }
 
-/* --- STYLE DU BOUTON CV (Spécial) --- */
-.cv-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.cv-content p {
-  margin: 0;
-  color: var(--couleur-texte-principal);
-}
-
-/* LE BOUTON CV : Style Nav mais moins rond */
-.btn-cv {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 12px 25px;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase; /* Comme la Nav */
-  text-decoration: none;
-
-  /* Moins rond que la nav (qui est a 50px) */
-  border-radius: 10px;
-
-  /* Couleurs dynamiques */
-  background-color: transparent;
-  border: 2px solid var(--couleur-texte-principal);
-  color: var(--couleur-texte-principal);
-
-  transition: all 0.3s ease;
-}
-
-.btn-cv:hover {
-  background-color: var(--couleur-accent); /* Devient rouge */
-  border-color: var(--couleur-accent);
-  color: var(--couleur-fond); /* Texte devient couleur de fond */
-  transform: translateY(-2px);
-}
-
-/* Responsive Mobile */
-@media (max-width: 600px) {
-  .cv-card {
+/* RESPONSIVE MOBILE */
+@media (max-width: 768px) {
+  .contact-page-container {
+    padding: 0 20px;
+  }
+  
+  /* CV devient vertical */
+  .cv-card-row {
     flex-direction: column;
     text-align: center;
+    gap: 20px;
   }
-  .btn-cv {
+  .cv-actions-row {
+    width: 100%;
+    flex-direction: column;
+  }
+  .btn-cv-view, .btn-cv-download-simple {
     width: 100%;
     justify-content: center;
+  }
+  
+  /* Formulaire une colonne */
+  .form-row {
+    flex-direction: column;
+    gap: 0;
   }
 }

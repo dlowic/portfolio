@@ -1,95 +1,120 @@
 /* src/assets/css/Footer.css */
 
-.site-footer {
+.footer-bar {
   width: 100%;
-  /* Padding plus petit pour un effet "barre" compacte */
+  background-color: var(--couleur-fond-composant);
+  border-top: 1px solid rgba(128, 128, 128, 0.1);
+  margin-top: auto;
   padding: 20px 40px;
-  border-top: 1px solid var(--couleur-fond-composant);
-  margin-top: auto; /* S'assure qu'il reste en bas grâce au flex de main */
-
-  /* On s'assure que le texte est lisible */
-  color: var(--couleur-texte-principal);
 }
 
 .footer-container {
-  /* AVANT : 1400px */
-  max-width: 1500px;
-
+  max-width: 1600px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
+  
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
 }
 
-/* --- PARTIE GAUCHE (Logo) --- */
+/* --- ZONE GAUCHE --- */
 .footer-left {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
+/* NOUVEAU : Style du lien logo */
+.footer-logo-link {
+  text-decoration: none; /* Pas de soulignement */
+  color: inherit; /* Garde la couleur du texte */
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.footer-logo-link:hover {
+  opacity: 0.8;
+  transform: scale(1.02); /* Petit effet "pop" au survol */
+}
+
 .footer-logo {
-  font-size: 1.5rem; /* Taille du nom */
-  font-weight: 800; /* Très gras comme sur l'image */
-  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
   color: var(--couleur-texte-principal);
   letter-spacing: -0.5px;
-  font-family: inherit;
 }
 
-.footer-logo .dot {
-  color: var(--couleur-accent); /* Le petit point rouge à la fin */
+.dot {
+  color: var(--couleur-accent);
 }
 
-.copyright {
+.footer-year {
   font-size: 0.9rem;
-  opacity: 0.6; /* Un peu plus discret */
-  margin-top: 4px;
-}
-
-/* --- PARTIE DROITE (Icônes) --- */
-.social-icons {
-  display: flex;
-  gap: 20px; /* Espacement entre les icônes */
-  align-items: center;
-}
-
-.social-icons a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 1.4rem; /* Taille des icônes */
+  opacity: 0.5;
   color: var(--couleur-texte-principal);
+}
+
+/* --- ZONE CENTRE --- */
+.footer-center {
+  display: flex;
+  justify-content: center;
+}
+
+.legal-link {
+  color: var(--couleur-texte-principal);
+  font-size: 0.9rem;
+  text-decoration: none;
+  opacity: 0.6;
   transition: all 0.3s ease;
-
-  /* Optionnel : Cercle autour au survol ou par défaut ? 
-     Sur ton image c'est juste l'icône, donc on laisse simple. */
+  white-space: nowrap;
 }
 
-.social-icons a:hover {
-  color: var(--couleur-accent); /* Devient rouge au survol */
-  transform: translateY(-3px); /* Petite animation vers le haut */
+.legal-link:hover {
+  opacity: 1;
+  color: var(--couleur-accent);
+  text-decoration: underline;
 }
 
-/* --- MOBILE --- */
-@media (max-width: 600px) {
-  .site-footer {
-    padding: 20px;
-    margin-bottom: 80px; /* Espace pour ne pas être caché par une barre d'adresse mobile */
-  }
+/* --- ZONE DROITE --- */
+.footer-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
 
+.footer-right a {
+  color: var(--couleur-texte-principal);
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.footer-right a:hover {
+  color: var(--couleur-accent);
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
   .footer-container {
-    flex-direction: column; /* Empile verticalement sur mobile */
-    gap: 20px;
-  }
-
-  .footer-left {
+    display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 15px;
+    text-align: center;
   }
-
-  .social-icons {
-    gap: 25px; /* Plus d'espace pour les doigts */
+  
+  .footer-left {
+    justify-content: center;
+  }
+  
+  .footer-right {
+    justify-content: center;
+  }
+  
+  .footer-bar {
+    padding: 20px;
   }
 }

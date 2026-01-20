@@ -20,6 +20,7 @@ import PageAccueil from "./pages/Accueil.jsx";
 import PageProjets from "./pages/Projects.jsx"; // On pointe bien vers le fichier corrigé
 import PageAPropos from "./pages/APropos.jsx";
 import PageContact from "./pages/Contact.jsx";
+import MentionsLegales from "./pages/MentionsLegales.jsx";
 
 import "./App.css";
 
@@ -116,6 +117,15 @@ function App() {
                     <PageContact />
                   </PageTransition>
                 }
+              />
+
+              <Route 
+                path="/mentions-legales" 
+                element={
+                  <PageTransition>
+                    <MentionsLegales />
+                  </PageTransition>
+                } 
               />
             </Routes>
           </AnimatePresence>

@@ -1,0 +1,49 @@
+/* src/assets/css/MentionsLegales.css */
+
+.legal-page-container {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 0 40px;
+  margin-bottom: 100px;
+  text-align: center; /* Comme sur ton screen */
+}
+
+.legal-page-container h1 {
+  font-size: 3rem;
+  color: var(--couleur-accent);
+  margin-bottom: 60px;
+  text-transform: uppercase;
+}
+
+.legal-section {
+  margin-bottom: 50px;
+}
+
+.legal-section h2 {
+  font-size: 1.5rem;
+  color: var(--couleur-texte-principal);
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.legal-section p {
+  color: var(--couleur-texte-principal);
+  line-height: 1.8;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.legal-section strong {
+  color: #fff;
+}
+
+.legal-section a {
+  color: var(--couleur-accent);
+  text-decoration: none;
+}
+
+.legal-section a:hover {
+  text-decoration: underline;
+}

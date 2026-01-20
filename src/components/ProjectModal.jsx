@@ -61,22 +61,31 @@ const ProjectModal = ({ project, onClose }) => {
           <p className="modal-description">{project.context}</p>
 
           <div className="modal-actions">
-            <a
-              href={project.siteLink}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-modal btn-primary"
-            >
-              Voir le site <FaExternalLinkAlt />
-            </a>
-            <a
-              href={project.githubLink}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-modal btn-secondary"
-            >
-              Code GitHub <FaGithub />
-            </a>
+            {/* Affiche le bouton SEULEMENT si siteLink n'est pas vide */}
+            {project.siteLink && (
+              <a
+                href={project.siteLink}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-modal btn-primary"
+              >
+                {/* On change le texte si c'est du Figma */}
+                {project.tags.includes("Figma") ? "Voir la maquette" : "Voir le site"}{" "}
+                <FaExternalLinkAlt />
+              </a>
+            )}
+
+            {/* Affiche le bouton SEULEMENT si githubLink n'est pas vide */}
+            {project.githubLink && (
+              <a
+                href={project.githubLink}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-modal btn-secondary"
+              >
+                Code GitHub <FaGithub />
+              </a>
+            )}
           </div>
         </div>
       </motion.div>

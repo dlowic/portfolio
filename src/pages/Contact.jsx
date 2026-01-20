@@ -1,64 +1,114 @@
 // src/pages/Contact.jsx
 
 import React from "react";
+import { motion } from "framer-motion";
 import "../assets/css/Contact.css";
-import { FaDownload, FaPaperPlane } from "react-icons/fa"; // Icônes
+import { FaDownload, FaPaperPlane, FaEye } from "react-icons/fa"; 
 import StatusBadge from "../components/StatusBadge";
-// Import du CV (Assure-toi de mettre ton fichier PDF dans ce dossier !)
-// Si le fichier n'existe pas encore, cette ligne peut faire une erreur,
-// tu peux la commenter en attendant d'avoir mis le fichier.
-import monCV from "../assets/ressource/mon-cv.pdf";
+import monCV from "../assets/ressource/digbeu-loic-cv.pdf";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 function Contact() {
   return (
-    <div className="contact-page-container">
-      {/* Section 2 : Le CV */}
-      <div className="contact-card cv-card">
+    <motion.div 
+      className="contact-page-container"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      
+      {/* --- BLOC 1 : LE CV (Barre du haut) --- */}
+      <motion.div className="contact-card cv-card-row" variants={itemVariants}>
         <div className="cv-content">
           <h3>Mon Curriculum Vitae</h3>
           <p>
-            Vous souhaitez en savoir plus sur mon parcours et mes compétences ?
+            Vous souhaitez en savoir plus ? Consultez mon CV ou téléchargez-le.
           </p>
         </div>
 
-        <a href={monCV} download="CV_Loic_Digbeu.pdf" className="btn-cv">
-          Télécharger mon CV <FaDownload />
-        </a>
-      </div>
-      <div className="contact-card">
+        <div className="cv-actions-row">
+          {/* Bouton Voir */}
+          <a 
+            href={monCV} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="btn-cv-view"
+          >
+            Voir <FaEye />
+          </a>
+
+          {/* Bouton Télécharger */}
+          <a 
+            href={monCV} 
+            download="CV_Loic_Digbeu.pdf" 
+            className="btn-cv-download-simple"
+          >
+            Télécharger <FaDownload />
+          </a>
+        </div>
+      </motion.div>
+
+      {/* --- BLOC 2 : LE FORMULAIRE (Juste en dessous) --- */}
+      <motion.div className="contact-card" variants={itemVariants}>
         <h2>Me Contacter</h2>
-        {/* 2. INSERTION DU BADGE ICI */}
+        
         <div style={{ marginBottom: "25px" }}>
           <StatusBadge />
         </div>
+        
         <p className="contact-intro">
-          Une proposition de stage ou d'alternace ? N'hésitez pas à m'envoyer un
-          message, je vous répondrai au plus vite.
+          Une proposition de stage ou d'alternance ? N'hésitez pas à m'envoyer un
+          message via ce formulaire, je vous répondrai au plus vite.
         </p>
 
         <form
           className="contact-form"
-          action="https://formspree.io/f/mdkbbybo"
+          action="https://formspree.io/f/mdkbbybo" 
           method="POST"
         >
-          <div className="form-group">
-            <label htmlFor="name">Nom</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Votre Nom"
-              required
-            />
+          <div className="form-row">
+            <div className="form-group half">
+              <label htmlFor="name">Nom Complet</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Votre Nom"
+                required
+              />
+            </div>
+
+            <div className="form-group half">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="votre@email.com"
+                required
+              />
+            </div>
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="subject">Sujet</label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="votre@email.com"
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Proposition de stage..."
               required
             />
           </div>
@@ -74,12 +124,13 @@ function Contact() {
             ></textarea>
           </div>
 
-          <button type="submit" className="btn btn-primary submit-btn">
-            Envoyer <FaPaperPlane className="btn-icon" />
+          <button type="submit" className="submit-btn">
+            Envoyer le message <FaPaperPlane />
           </button>
         </form>
-      </div>
-    </div>
+      </motion.div>
+
+    </motion.div>
   );
 }
 

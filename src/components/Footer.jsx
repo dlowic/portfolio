@@ -1,59 +1,59 @@
 // src/components/Footer.jsx
-
 import React from "react";
 import { Link } from "react-router-dom";
 import "../assets/css/Footer.css";
-
-// Import uniquement des icônes que tu utilises
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    // On garde la même couleur de fond que le header pour la cohérence
-    <footer
-      className="site-footer"
-      style={{ backgroundColor: "var(--couleur-fond-header)" }}
-    >
+    <footer className="footer-bar">
       <div className="footer-container">
-        {/* GAUCHE : Ton Logo / Nom */}
+        
+        {/* ZONE GAUCHE : Logo (Maintenant cliquable !) + Année */}
         <div className="footer-left">
-          <Link to="/" className="footer-logo">
-            Loic Digbeu<span className="dot">.</span>
+          <Link to="/" className="footer-logo-link" aria-label="Retour à l'accueil">
+            <span className="footer-logo">
+              Loic Digbeu<span className="dot">.</span>
+            </span>
           </Link>
-          <span className="copyright">&copy; {currentYear}</span>
+          <span className="footer-year">© {currentYear}</span>
         </div>
 
-        {/* DROITE : Les Icônes */}
-        <div className="footer-right social-icons">
-          {/* GitHub */}
+        {/* ZONE CENTRE : Mentions Légales */}
+        <div className="footer-center">
+          <Link to="/mentions-legales" className="legal-link">
+            Mentions Légales
+          </Link>
+        </div>
+
+        {/* ZONE DROITE : Icônes */}
+        <div className="footer-right">
           <a
-            href="https://github.com/dlowic"
+            href="https://github.com/ton-pseudo"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noreferrer"
             aria-label="GitHub"
           >
             <FaGithub />
           </a>
-
-          {/* LinkedIn */}
           <a
-            href="https://www.linkedin.com/in/loic-digbeu-594792347/"
+            href="https://linkedin.com/in/ton-profil"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noreferrer"
             aria-label="LinkedIn"
           >
             <FaLinkedin />
           </a>
-
-          {/* Email -> Redirection vers la page Contact */}
-          {/* On utilise Link au lieu de <a> pour rester dans l'application */}
-          <Link to="/contact" aria-label="Me contacter">
-            <MdEmail />
-          </Link>
+          <a
+            href="mailto:ton-email@gmail.com"
+            aria-label="Email"
+          >
+            <FaEnvelope />
+          </a>
         </div>
+
       </div>
     </footer>
   );
