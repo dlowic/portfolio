@@ -1,7 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt, FaTimes, FaFigma } from "react-icons/fa"; // Ajout de l'icône Figma
+import { FaGithub, FaExternalLinkAlt, FaTimes, FaFigma } from "react-icons/fa";
 import "../assets/css/Projects.css";
+
+// 👇 IMPORT DU CAROUSEL
+import ProjectCarousel from "./ProjectCarousel";
 
 const dropIn = {
   hidden: { y: "100vh", opacity: 0 },
@@ -17,7 +20,6 @@ const ProjectModal = ({ project, onClose }) => {
   if (!project) return null;
 
   // LOGIQUE DE DÉTECTION FIGMA
-  // On regarde si "Figma" est dans les tags OU si le lien contient "figma.com"
   const isFigmaProject =
     project.tags.includes("Figma") ||
     (project.siteLink && project.siteLink.includes("figma.com"));
@@ -38,7 +40,12 @@ const ProjectModal = ({ project, onClose }) => {
 
         {/* ZONE IMAGE (FIXE) */}
         <div className="modal-image-container">
-          <img src={project.image} alt={project.title} />
+          {/* 👇 LOGIQUE : Si 'gallery' existe, on met le Carousel, sinon l'image simple */}
+          {project.gallery && project.gallery.length > 0 ? (
+            <ProjectCarousel images={project.gallery} />
+          ) : (
+            <img src={project.image} alt={project.title} />
+          )}
         </div>
 
         {/* ZONE CONTENU (SCROLLABLE) */}
@@ -90,7 +97,6 @@ const ProjectModal = ({ project, onClose }) => {
                 rel="noreferrer"
                 className="btn-modal btn-primary"
               >
-                {/* On change le texte et l'icône selon le type */}
                 {isFigmaProject ? (
                   <>
                     Voir le Prototype <FaFigma />
