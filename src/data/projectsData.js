@@ -1,7 +1,7 @@
 // src/data/projectsData.js
 
 // Importe tes images ici si besoin, sinon laisse les liens externes
-import imgPortfolio from "../assets/images/moi.webp";
+import imgPortfolio from "../assets/images/moi.jpg";
 
 const projectsData = [
   // --- 1. PROJET PHP (Boole & Bin) ---
