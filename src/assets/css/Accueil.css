@@ -17,7 +17,7 @@
 
   display: flex;
 
-  /* Coupe net tout ce qui dépasse (le ticker) */
+  /* Coupe net tout ce qui dépasse (le ticke) */
   overflow: hidden;
   position: relative;
 }
@@ -190,7 +190,9 @@
   object-fit: cover;
   opacity: 0.9;
   filter: grayscale(100%);
-  transition: filter 0.5s ease, transform 0.5s ease;
+  transition:
+    filter 0.5s ease,
+    transform 0.5s ease;
 }
 
 .split-right:hover .cover-img {

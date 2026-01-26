@@ -119,13 +119,13 @@ function App() {
                 }
               />
 
-              <Route 
-                path="/mentions-legales" 
+              <Route
+                path="/mentions-legales"
                 element={
                   <PageTransition>
                     <MentionsLegales />
                   </PageTransition>
-                } 
+                }
               />
             </Routes>
           </AnimatePresence>

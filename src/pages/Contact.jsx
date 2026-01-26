@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import "../assets/css/Contact.css";
-import { FaDownload, FaPaperPlane, FaEye } from "react-icons/fa"; 
+import { FaDownload, FaPaperPlane, FaEye } from "react-icons/fa";
 import StatusBadge from "../components/StatusBadge";
 import monCV from "../assets/ressource/digbeu-loic-cv.pdf";
 
@@ -22,13 +22,12 @@ const itemVariants = {
 
 function Contact() {
   return (
-    <motion.div 
+    <motion.div
       className="contact-page-container"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      
       {/* --- BLOC 1 : LE CV (Barre du haut) --- */}
       <motion.div className="contact-card cv-card-row" variants={itemVariants}>
         <div className="cv-content">
@@ -40,19 +39,19 @@ function Contact() {
 
         <div className="cv-actions-row">
           {/* Bouton Voir */}
-          <a 
-            href={monCV} 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href={monCV}
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-cv-view"
           >
             Voir <FaEye />
           </a>
 
           {/* Bouton Télécharger */}
-          <a 
-            href={monCV} 
-            download="CV_Loic_Digbeu.pdf" 
+          <a
+            href={monCV}
+            download="CV_Loic_Digbeu.pdf"
             className="btn-cv-download-simple"
           >
             Télécharger <FaDownload />
@@ -63,19 +62,19 @@ function Contact() {
       {/* --- BLOC 2 : LE FORMULAIRE (Juste en dessous) --- */}
       <motion.div className="contact-card" variants={itemVariants}>
         <h2>Me Contacter</h2>
-        
+
         <div style={{ marginBottom: "25px" }}>
           <StatusBadge />
         </div>
-        
+
         <p className="contact-intro">
-          Une proposition de stage ou d'alternance ? N'hésitez pas à m'envoyer un
-          message via ce formulaire, je vous répondrai au plus vite.
+          Une proposition de stage ou d'alternance ? N'hésitez pas à m'envoyer
+          un message via ce formulaire, je vous répondrai au plus vite.
         </p>
 
         <form
           className="contact-form"
-          action="https://formspree.io/f/mdkbbybo" 
+          action="https://formspree.io/f/mdkbbybo"
           method="POST"
         >
           <div className="form-row">
@@ -129,7 +128,6 @@ function Contact() {
           </button>
         </form>
       </motion.div>
-
     </motion.div>
   );
 }

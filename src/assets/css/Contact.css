@@ -16,7 +16,7 @@
 /* --- STYLE GÉNÉRAL DES CARTES --- */
 .contact-card {
   width: 100%; /* Prend toute la largeur du conteneur */
-  
+
   background-color: var(--couleur-fond-composant);
   border: 1px solid rgba(128, 128, 128, 0.1);
   border-radius: 20px;
@@ -79,7 +79,7 @@
   text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
-  
+
   background-color: var(--couleur-accent);
   color: #fff;
   border: 2px solid var(--couleur-accent);
@@ -101,7 +101,7 @@
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
-  
+
   background-color: transparent;
   color: var(--couleur-texte-principal);
   border: 2px solid rgba(128, 128, 128, 0.3);
@@ -112,7 +112,6 @@
   color: var(--couleur-accent);
   transform: translateY(-2px);
 }
-
 
 /* --- FORMULAIRE --- */
 .contact-intro {
@@ -156,6 +155,7 @@
   font-size: 1rem;
   font-family: inherit;
   transition: all 0.3s ease;
+  resize: none;
 }
 
 .form-group input:focus,
@@ -197,7 +197,7 @@
   .contact-page-container {
     padding: 0 20px;
   }
-  
+
   /* CV devient vertical */
   .cv-card-row {
     flex-direction: column;
@@ -208,11 +208,12 @@
     width: 100%;
     flex-direction: column;
   }
-  .btn-cv-view, .btn-cv-download-simple {
+  .btn-cv-view,
+  .btn-cv-download-simple {
     width: 100%;
     justify-content: center;
   }
-  
+
   /* Formulaire une colonne */
   .form-row {
     flex-direction: column;

@@ -1,6 +1,6 @@
 // src/components/Footer.jsx
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; // 👈 IMPORTANT : Import du Link
 import "../assets/css/Footer.css";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
@@ -10,14 +10,19 @@ function Footer() {
   return (
     <footer className="footer-bar">
       <div className="footer-container">
-        
-        {/* ZONE GAUCHE : Logo (Maintenant cliquable !) + Année */}
+        {/* ZONE GAUCHE : Logo Cliquable + Année */}
         <div className="footer-left">
-          <Link to="/" className="footer-logo-link" aria-label="Retour à l'accueil">
+          {/* 👇 C'EST ICI QUE LA MAGIE OPÈRE : LE LINK AVEC LA CLASSE */}
+          <Link
+            to="/"
+            className="footer-logo-link"
+            aria-label="Retour à l'accueil"
+          >
             <span className="footer-logo">
               Loic Digbeu<span className="dot">.</span>
             </span>
           </Link>
+
           <span className="footer-year">© {currentYear}</span>
         </div>
 
@@ -46,14 +51,10 @@ function Footer() {
           >
             <FaLinkedin />
           </a>
-          <a
-            href="mailto:ton-email@gmail.com"
-            aria-label="Email"
-          >
+          <a href="mailto:ton-email@gmail.com" aria-label="Email">
             <FaEnvelope />
           </a>
         </div>
-
       </div>
     </footer>
   );

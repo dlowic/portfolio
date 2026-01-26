@@ -1,6 +1,8 @@
 /* src/assets/css/Projects.css */
 
-/* --- CONFIGURATION GLOBALE --- */
+/* =========================================
+   1. CONFIGURATION GÉNÉRALE DE LA PAGE
+   ========================================= */
 .projects-page-container {
   max-width: 1600px;
   margin: 60px auto;
@@ -13,7 +15,6 @@
   font-size: clamp(3rem, 5vw, 4rem);
   font-weight: 900;
   text-transform: uppercase;
-  /* On réduit la marge car il y a les filtres en dessous maintenant */
   margin-bottom: 40px;
   color: var(--couleur-texte-principal);
   letter-spacing: -2px;
@@ -24,19 +25,20 @@
   color: var(--couleur-accent);
 }
 
-/* --- SYSTÈME DE FILTRES (NOUVEAU) --- */
+/* --- FILTRES (Zone Globale) --- */
 .filters-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 15px;
-  margin-bottom: 60px; /* Espace entre les boutons et la grille */
+  margin-bottom: 60px;
 }
 
+/* Boutons filtres classiques */
 .filter-btn {
   padding: 10px 25px;
-  border-radius: 50px; /* Forme de pillule */
-  border: 1px solid rgba(128, 128, 128, 0.3); /* Bordure subtile */
+  border-radius: 50px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
   background-color: transparent;
   color: var(--couleur-texte-principal);
   font-size: 1rem;
@@ -50,24 +52,84 @@
   color: var(--couleur-accent);
 }
 
-/* Style du bouton actif (Sélectionné) */
 .filter-btn.active {
   background-color: var(--couleur-accent);
   border-color: var(--couleur-accent);
-  color: #fff; /* Texte blanc sur fond rouge */
+  color: #fff;
   transform: scale(1.05);
   box-shadow: 0 5px 15px rgba(239, 96, 107, 0.3);
 }
 
-/* --- GRILLE --- */
+/* --- FILTRE DÉROULANT (TYPE) --- */
+.filter-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Bouton spécial "Type" */
+.special-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(128, 128, 128, 0.1);
+}
+
+/* Menu Déroulant */
+.filter-dropdown-menu {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background-color: var(--couleur-fond-composant);
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  border-radius: 15px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 200px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 50;
+}
+
+.filter-dropdown-menu button {
+  background: transparent;
+  border: none;
+  color: var(--couleur-texte-principal);
+  padding: 10px 15px;
+  text-align: left;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.filter-dropdown-menu button:hover {
+  background-color: var(--couleur-accent);
+  color: #fff;
+}
+
+/* Style de l'élément actif DANS le menu (Rouge) */
+.active-dropdown-item {
+  color: var(--couleur-accent) !important;
+  font-weight: 800 !important;
+  background-color: rgba(
+    239,
+    96,
+    107,
+    0.1
+  ) !important; /* Fond rouge très léger */
+}
+
+/* =========================================
+   2. GRILLE ET CARTES PROJETS
+   ========================================= */
 .projects-grid {
   display: grid;
-  /* Cartes un peu moins larges min (400px) pour bien remplir l'espace */
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 40px;
 }
 
-/* --- CARTE PROJET --- */
+/* --- CARTE --- */
 .project-card {
   background-color: var(--couleur-fond-composant);
   border: 1px solid rgba(128, 128, 128, 0.1);
@@ -79,7 +141,6 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  /* On s'assure que la carte a une hauteur cohérente */
   height: 100%;
 }
 
@@ -87,21 +148,19 @@
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
-/* HOVER */
 .project-card:hover {
   transform: translateY(-8px);
   border-color: var(--couleur-accent);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* --- PROPORTIONS IMAGE (AJUSTÉES) --- */
+/* --- IMAGE CARTE --- */
 .card-image-wrapper {
-  /* Hauteur fixe pour l'image : Donne ce look 50/50 ou 60/40 */
   height: 260px;
   width: 100%;
   overflow: hidden;
   border-bottom: 1px solid rgba(128, 128, 128, 0.1);
-  flex-shrink: 0; /* Empêche l'image de rétrécir */
+  flex-shrink: 0;
 }
 
 .project-img {
@@ -115,17 +174,17 @@
   transform: scale(1.05);
 }
 
-/* --- CONTENU (AJUSTÉ) --- */
+/* --- CONTENU CARTE --- */
 .card-content {
-  padding: 25px; /* Un peu moins de padding pour être compact */
+  padding: 25px;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Pousse le footer en bas */
+  justify-content: space-between;
 }
 
 .card-title {
-  font-size: 1.6rem; /* Titre légèrement réduit pour l'équilibre */
+  font-size: 1.6rem;
   font-weight: 800;
   margin-bottom: 10px;
   color: var(--couleur-texte-principal);
@@ -137,15 +196,13 @@
   opacity: 0.7;
   margin-bottom: 20px;
   line-height: 1.5;
-
-  /* Limite le texte à 3 lignes pour garder les cartes alignées */
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* --- TAGS --- */
+/* --- TAGS CARTE --- */
 .card-tags {
   display: flex;
   flex-wrap: wrap;
@@ -173,9 +230,9 @@
   color: #fff;
 }
 
-/* --- BOUTON DU BAS --- */
+/* --- BOUTON CARTE (Voir plus) --- */
 .card-footer {
-  margin-top: auto; /* Colle le bouton tout en bas */
+  margin-top: auto;
 }
 
 .card-btn-link {
@@ -201,7 +258,9 @@
   color: #fff;
 }
 
-/* --- MODALE --- */
+/* =========================================
+   3. MODALE (POP-UP) - STRUCTURE SANDWICH
+   ========================================= */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -219,15 +278,20 @@
 
 .modal-content {
   background-color: var(--couleur-fond-composant);
-  width: 100%;
-  max-width: 800px;
+  width: 95%;
+  max-width: 1300px;
+  height: 90vh; /* Hauteur fixe */
+  max-height: 90vh;
   border-radius: 20px;
-  overflow: hidden;
-  position: relative;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(128, 128, 128, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
+/* BOUTON FERMER */
 .modal-close-btn {
   position: absolute;
   top: 20px;
@@ -243,41 +307,78 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 20;
   transition: background 0.3s;
 }
 .modal-close-btn:hover {
   background: var(--couleur-accent);
 }
 
+/* --- A. ZONE HAUTE (IMAGE) --- */
 .modal-image-container {
   width: 100%;
-  height: 350px;
-  background-color: #000;
+  height: 50%;
+  flex-shrink: 0;
+  background-color: #050505;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
 }
+
 .modal-image-container img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  display: block;
 }
 
-.modal-body {
-  padding: 40px;
+/* --- B. ZONE MILIEU (TEXTE SCROLLABLE) --- */
+.modal-scrollable-content {
+  padding: 30px 40px;
+  flex-grow: 1;
+  overflow-y: auto;
   color: var(--couleur-texte-principal);
 }
 
-.modal-title {
-  font-size: 2.5rem;
-  color: var(--couleur-accent);
-  margin-bottom: 15px;
+.modal-scrollable-content::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-scrollable-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+.modal-scrollable-content::-webkit-scrollbar-thumb {
+  background-color: var(--couleur-accent);
+  border-radius: 4px;
 }
 
+.modal-title {
+  font-size: 2.2rem;
+  color: var(--couleur-accent);
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+.modal-subtitle {
+  font-size: 1.1rem;
+  color: var(--couleur-texte-principal);
+  opacity: 0.6;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+.modal-description {
+  color: var(--couleur-texte-principal);
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+}
 .modal-tags {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 25px;
 }
-
 .modal-tag-pill {
   background: transparent;
   border: 1px solid var(--couleur-accent);
@@ -288,21 +389,13 @@
   font-weight: bold;
 }
 
-.modal-subtitle {
-  font-size: 1.1rem;
-  color: var(--couleur-texte-principal);
-  opacity: 0.6;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: bold;
-}
-
-.modal-description {
-  color: var(--couleur-texte-principal);
-  line-height: 1.8;
-  margin-bottom: 40px;
-  font-size: 1.05rem;
+/* --- C. ZONE BASSE (ACTIONS) --- */
+.modal-fixed-footer {
+  padding: 20px 40px;
+  background-color: var(--couleur-fond-composant);
+  border-top: 1px solid rgba(128, 128, 128, 0.1);
+  flex-shrink: 0;
+  z-index: 10;
 }
 
 .modal-actions {
@@ -343,14 +436,29 @@
   transform: translateY(-2px);
 }
 
+/* =========================================
+   4. RESPONSIVE DESIGN
+   ========================================= */
 @media (max-width: 900px) {
   .projects-grid {
     grid-template-columns: 1fr;
   }
+  .projects-page-container {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-image-container {
+    height: 35%;
+  }
   .modal-actions {
     flex-direction: column;
   }
-  .projects-page-container {
-    padding: 0 20px;
+  .modal-scrollable-content {
+    padding: 20px;
+  }
+  .modal-fixed-footer {
+    padding: 15px 20px;
   }
 }

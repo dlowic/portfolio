@@ -3,7 +3,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../assets/css/Accueil.css";
-import maPhoto from "../assets/images/moi.webp";
+import maPhoto from "../assets/images/moi.jpg";
 import StatusBadge from "../components/StatusBadge";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -38,9 +38,15 @@ function Accueil() {
           </h1>
           <div className="separator"></div>
           <p className="description">
-            Étudiant en <strong>BUT MMI</strong> spécialisé en développement
-            Front-End. Je construis des expériences digitales fluides, réactives
-            et mémorables.
+            Développeur Front-End Junior en formation de{" "}
+            <strong>BUT2 Métiers du Multimédia et de l'Internet</strong> à l'IUT
+            de Bobigny (parcours{" "}
+            <strong>Développement Web et Dispositifs Interactifs</strong>).
+            Grâce à ma pluridisciplinarité, je conçois des expériences digitales
+            complètes avec une{" "}
+            <strong>triple casquette UI, UX et Graphisme</strong>. Je suis à la
+            recherche d'un stage de <strong>12 semaines</strong> à partir du{" "}
+            <strong>7 avril</strong>.
           </p>
           <div className="btn-group">
             <Link to="/projets" className="btn-solid">

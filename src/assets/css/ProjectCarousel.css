@@ -1,0 +1,58 @@
+/* src/assets/css/ProjectCarousel.css */
+
+.carousel-container {
+  width: 100%;
+  height: 100%; /* Prend toute la hauteur du conteneur modal */
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Affiche l'image entière sans couper */
+  /* Si tu préfères que ça remplisse tout quitte à couper, mets object-fit: cover; */
+}
+
+.carousel-controls {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 5px 15px;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.carousel-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.carousel-btn:hover {
+  color: var(--couleur-accent);
+}
+
+.carousel-counter {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: bold;
+  font-family: monospace;
+}

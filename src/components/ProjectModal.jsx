@@ -1,39 +1,33 @@
-// src/components/ProjectModal.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt, FaTimes } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaTimes, FaFigma } from "react-icons/fa"; // Ajout de l'icône Figma
 import "../assets/css/Projects.css";
 
-// ANIMATION CORRIGÉE : Simple Zoom + Fondu (plus stable)
-const zoomIn = {
-  hidden: {
-    opacity: 0,
-    scale: 0.8, // Commence un peu plus petit
-  },
+const dropIn = {
+  hidden: { y: "100vh", opacity: 0 },
   visible: {
+    y: "0",
     opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.3,
-      ease: "easeOut", // Arrivée fluide
-    },
+    transition: { duration: 0.4, type: "spring", damping: 25, stiffness: 500 },
   },
-  exit: {
-    opacity: 0,
-    scale: 0.8,
-    transition: { duration: 0.2 },
-  },
+  exit: { y: "100vh", opacity: 0 },
 };
 
 const ProjectModal = ({ project, onClose }) => {
   if (!project) return null;
+
+  // LOGIQUE DE DÉTECTION FIGMA
+  // On regarde si "Figma" est dans les tags OU si le lien contient "figma.com"
+  const isFigmaProject =
+    project.tags.includes("Figma") ||
+    (project.siteLink && project.siteLink.includes("figma.com"));
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <motion.div
         className="modal-content"
         onClick={(e) => e.stopPropagation()}
-        variants={zoomIn} // On utilise la nouvelle animation
+        variants={dropIn}
         initial="hidden"
         animate="visible"
         exit="exit"
@@ -42,12 +36,36 @@ const ProjectModal = ({ project, onClose }) => {
           <FaTimes />
         </button>
 
+        {/* ZONE IMAGE (FIXE) */}
         <div className="modal-image-container">
           <img src={project.image} alt={project.title} />
         </div>
 
-        <div className="modal-body">
+        {/* ZONE CONTENU (SCROLLABLE) */}
+        <div className="modal-scrollable-content">
           <h2 className="modal-title">{project.title}</h2>
+
+          {/* MÉTADONNÉES (Année / Durée / Type) */}
+          <div
+            className="modal-meta-info"
+            style={{
+              marginBottom: "20px",
+              color: "var(--couleur-texte-principal)",
+              opacity: 0.7,
+              fontSize: "0.9rem",
+              fontWeight: "600",
+            }}
+          >
+            <span>{project.year}</span>
+            <span style={{ margin: "0 10px" }}>•</span>
+            <span>{project.duration}</span>
+            <span style={{ margin: "0 10px" }}>•</span>
+            <span style={{ textTransform: "capitalize" }}>
+              {project.type === "school"
+                ? " Projet Universitaire"
+                : " Projet Personnel"}
+            </span>
+          </div>
 
           <div className="modal-tags">
             {project.tags.map((tag, idx) => (
@@ -59,9 +77,12 @@ const ProjectModal = ({ project, onClose }) => {
 
           <h3 className="modal-subtitle">Contexte</h3>
           <p className="modal-description">{project.context}</p>
+        </div>
 
+        {/* ZONE ACTIONS (FIXE EN BAS) */}
+        <div className="modal-fixed-footer">
           <div className="modal-actions">
-            {/* Affiche le bouton SEULEMENT si siteLink n'est pas vide */}
+            {/* BOUTON PRINCIPAL (Site ou Figma) */}
             {project.siteLink && (
               <a
                 href={project.siteLink}
@@ -69,13 +90,20 @@ const ProjectModal = ({ project, onClose }) => {
                 rel="noreferrer"
                 className="btn-modal btn-primary"
               >
-                {/* On change le texte si c'est du Figma */}
-                {project.tags.includes("Figma") ? "Voir la maquette" : "Voir le site"}{" "}
-                <FaExternalLinkAlt />
+                {/* On change le texte et l'icône selon le type */}
+                {isFigmaProject ? (
+                  <>
+                    Voir le Prototype <FaFigma />
+                  </>
+                ) : (
+                  <>
+                    Voir le site <FaExternalLinkAlt />
+                  </>
+                )}
               </a>
             )}
 
-            {/* Affiche le bouton SEULEMENT si githubLink n'est pas vide */}
+            {/* BOUTON GITHUB (Si le lien existe) */}
             {project.githubLink && (
               <a
                 href={project.githubLink}

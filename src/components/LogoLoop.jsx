@@ -4,7 +4,7 @@ import "../assets/css/LogoLoop.css";
 const ANIMATION_CONFIG = { SMOOTH_TAU: 0.25, MIN_COPIES: 2, COPY_HEADROOM: 2 };
 
 const toCssLength = (value) =>
-  typeof value === "number" ? `${value}px` : value ?? undefined;
+  typeof value === "number" ? `${value}px` : (value ?? undefined);
 
 const useResizeObserver = (callback, elements, dependencies) => {
   useEffect(() => {
@@ -64,7 +64,7 @@ const useAnimationLoop = (
   seqHeight,
   isHovered,
   hoverSpeed,
-  isVertical
+  isVertical,
 ) => {
   const rafRef = useRef(null);
   const lastTimestampRef = useRef(null);
@@ -219,7 +219,7 @@ export const LogoLoop = memo(
     useResizeObserver(
       updateDimensions,
       [containerRef, seqRef],
-      [logos, gap, logoHeight, isVertical]
+      [logos, gap, logoHeight, isVertical],
     );
 
     useImageLoader(seqRef, updateDimensions, [
@@ -236,7 +236,7 @@ export const LogoLoop = memo(
       seqHeight,
       isHovered,
       effectiveHoverSpeed,
-      isVertical
+      isVertical,
     );
 
     const cssVariables = useMemo(
@@ -245,7 +245,7 @@ export const LogoLoop = memo(
         "--logoloop-logoHeight": `${logoHeight}px`,
         ...(fadeOutColor && { "--logoloop-fadeColor": fadeOutColor }),
       }),
-      [gap, logoHeight, fadeOutColor]
+      [gap, logoHeight, fadeOutColor],
     );
 
     const rootClassName = useMemo(
@@ -259,7 +259,7 @@ export const LogoLoop = memo(
         ]
           .filter(Boolean)
           .join(" "),
-      [isVertical, fadeOut, scaleOnHover, className]
+      [isVertical, fadeOut, scaleOnHover, className],
     );
 
     const handleMouseEnter = useCallback(() => {
@@ -301,8 +301,8 @@ export const LogoLoop = memo(
           />
         );
         const itemAriaLabel = isNodeItem
-          ? item.ariaLabel ?? item.title
-          : item.alt ?? item.title;
+          ? (item.ariaLabel ?? item.title)
+          : (item.alt ?? item.title);
         const itemContent = item.href ? (
           <a
             className="logoloop__link"
@@ -322,7 +322,7 @@ export const LogoLoop = memo(
           </li>
         );
       },
-      [renderItem]
+      [renderItem],
     );
 
     const logoLists = useMemo(
@@ -336,11 +336,11 @@ export const LogoLoop = memo(
             ref={copyIndex === 0 ? seqRef : undefined}
           >
             {logos.map((item, itemIndex) =>
-              renderLogoItem(item, `${copyIndex}-${itemIndex}`)
+              renderLogoItem(item, `${copyIndex}-${itemIndex}`),
             )}
           </ul>
         )),
-      [copyCount, logos, renderLogoItem]
+      [copyCount, logos, renderLogoItem],
     );
 
     const containerStyle = useMemo(
@@ -349,11 +349,11 @@ export const LogoLoop = memo(
           ? toCssLength(width) === "100%"
             ? undefined
             : toCssLength(width)
-          : toCssLength(width) ?? "100%",
+          : (toCssLength(width) ?? "100%"),
         ...cssVariables,
         ...style,
       }),
-      [width, cssVariables, style, isVertical]
+      [width, cssVariables, style, isVertical],
     );
 
     return (
@@ -374,7 +374,7 @@ export const LogoLoop = memo(
         </div>
       </div>
     );
-  }
+  },
 );
 
 LogoLoop.displayName = "LogoLoop";

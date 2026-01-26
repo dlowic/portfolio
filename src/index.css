@@ -49,7 +49,9 @@ body {
   color: var(--couleur-texte-principal);
 
   /* Effet de transition fluide */
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 
   /* Empêche le scroll horizontal inutile */
   width: 100%;
@@ -108,7 +110,9 @@ main {
   width: 100%;
 
   /* Animation */
-  transition: opacity 1s ease, filter 1s ease;
+  transition:
+    opacity 1s ease,
+    filter 1s ease;
   opacity: 1;
 
   /* ⚠️ IMPORTANT : J'ai SUPPRIMÉ la ligne "filter: blur(0px);" ici.

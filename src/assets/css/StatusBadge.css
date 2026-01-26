@@ -2,66 +2,64 @@
 
 /* --- LE CONTENEUR DU BADGE (Bouton) --- */
 .status-badge {
-  /* Reset du style bouton par défaut */
   border: none;
   cursor: pointer;
   font-family: inherit;
-
-  /* Forme et taille "Miniature" */
   display: inline-flex;
   align-items: center;
-  gap: 10px; /* Espace entre le point et le texte */
-  padding: 8px 16px; /* Taille compacte */
-  border-radius: 50px; /* Forme de pilule très arrondie */
-
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 50px;
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--couleur-texte-principal); /* S'adapte au thème */
 
-  transition: transform 0.2s ease, background-color 0.3s ease;
+  /* Utilisation de la variable */
+  color: var(--couleur-texte-principal);
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
-/* Effet de survol */
 .status-badge:hover {
-  transform: scale(1.03); /* Léger agrandissement */
+  transform: scale(1.03);
 }
 
-/* --- L'EFFET "IOS GLASS" (Verre Dépoli) --- */
+/* --- L'EFFET "IOS GLASS" --- */
 .ios-glass {
-  /* L'ingrédient secret pour le flou derrière */
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px); /* Pour Safari */
-
-  /* Bordure subtile et ombre douce */
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Gestion des couleurs du verre selon le thème */
-
-/* En mode Sombre (Grimm) : Verre teinté sombre */
+/* Mode Sombre */
 :root,
 [data-theme="dark"] .ios-glass {
-  background-color: rgba(40, 40, 40, 0.4); /* Noir semi-transparent */
+  background-color: rgba(40, 40, 40, 0.4);
 }
 
-/* En mode Clair (NKG) : Verre teinté clair (frosted glass) */
+/* Mode Clair : CORRECTION ICI */
 [data-theme="light"] .ios-glass {
-  background-color: rgba(255, 255, 255, 0.4); /* Blanc semi-transparent */
-  border-color: rgba(0, 0, 0, 0.05); /* Bordure plus foncée en mode clair */
+  /* Fond plus opaque pour que le texte ressorte bien */
+  background-color: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.1);
+
+  /* Force le texte en noir si la variable bug */
+  color: #1a1a1a !important;
 }
 
-/* --- LE POINT VERT ANIMÉ (Version Mini & Responsive) --- */
+/* --- LE POINT VERT ANIMÉ --- */
 .pulse-dot-mini {
   position: relative;
   width: 10px;
   height: 10px;
-  background-color: #28a745; /* Vert */
+  background-color: #28a745;
   border-radius: 50%;
-  flex-shrink: 0; /* Empêche le point de s'écraser */
+  flex-shrink: 0;
 }
 
-/* L'animation (corrigée pour le responsive) */
 .pulse-dot-mini::after {
   content: "";
   position: absolute;
@@ -69,12 +67,11 @@
   left: 50%;
   width: 100%;
   height: 100%;
-  background-color: inherit; /* Même vert */
+  background-color: inherit;
   border-radius: 50%;
-  /* L'astuce responsive : on utilise translate et scale au lieu de width/height fixes */
   transform: translate(-50%, -50%) scale(1);
   animation: responsive-pulse 2s infinite ease-out;
-  z-index: -1; /* Derrière le point principal */
+  z-index: -1;
 }
 
 @keyframes responsive-pulse {
@@ -83,12 +80,11 @@
     opacity: 0.7;
   }
   100% {
-    transform: translate(-50%, -50%) scale(3); /* S'agrandit x3 */
-    opacity: 0; /* Devient transparent */
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
   }
 }
 
-/* Petit ajustement mobile */
 @media (max-width: 480px) {
   .status-badge {
     font-size: 0.85rem;

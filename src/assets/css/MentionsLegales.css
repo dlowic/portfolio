@@ -1,49 +1,115 @@
 /* src/assets/css/MentionsLegales.css */
 
 .legal-page-container {
-  max-width: 800px;
-  margin: 60px auto;
-  padding: 0 40px;
-  margin-bottom: 100px;
-  text-align: center; /* Comme sur ton screen */
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 0 20px;
+  margin-bottom: 120px;
 }
 
-.legal-page-container h1 {
-  font-size: 3rem;
-  color: var(--couleur-accent);
-  margin-bottom: 60px;
+/* --- LA CARTE "PAPIER" --- */
+.legal-card {
+  background-color: var(--couleur-fond-composant); /* Fond gris/noir */
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  border-radius: 20px;
+  padding: 60px; /* Beaucoup d'espace interne */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Petit effet de bordure rouge en haut pour le style */
+.legal-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--couleur-accent);
+}
+
+/* --- TYPOGRAPHIE --- */
+.legal-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-align: center;
   text-transform: uppercase;
+  color: var(--couleur-texte-principal);
+  margin-bottom: 60px;
+  letter-spacing: -1px;
 }
 
+.legal-title span {
+  color: var(--couleur-accent);
+}
+
+/* --- SECTIONS --- */
 .legal-section {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1); /* Ligne de séparation */
+  padding-bottom: 40px;
+}
+
+.legal-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .legal-section h2 {
-  font-size: 1.5rem;
-  color: var(--couleur-texte-principal);
+  font-size: 1.4rem;
+  color: var(--couleur-accent);
   margin-bottom: 20px;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
-  padding-bottom: 10px;
-  display: inline-block;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Les petits numéros devant les titres (optionnel mais classe) */
+.legal-section h2::before {
+  content: "#";
+  opacity: 0.3;
+  color: var(--couleur-texte-principal);
 }
 
 .legal-section p {
   color: var(--couleur-texte-principal);
   line-height: 1.8;
   font-size: 1rem;
-  opacity: 0.9;
+  opacity: 0.8;
+  margin-bottom: 10px;
 }
 
 .legal-section strong {
-  color: #fff;
+  color: #fff; /* Blanc pur pour ressortir */
+  font-weight: bold;
+}
+/* Adaptation mode clair pour le gras */
+[data-theme="light"] .legal-section strong {
+  color: #000;
 }
 
 .legal-section a {
-  color: var(--couleur-accent);
-  text-decoration: none;
+  color: var(--couleur-texte-principal);
+  text-decoration: underline;
+  text-decoration-color: var(--couleur-accent);
+  text-underline-offset: 4px;
+  transition: all 0.3s ease;
 }
 
 .legal-section a:hover {
-  text-decoration: underline;
+  color: var(--couleur-accent);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .legal-card {
+    padding: 30px;
+  }
+  .legal-title {
+    font-size: 2rem;
+  }
 }

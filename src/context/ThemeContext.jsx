@@ -10,7 +10,7 @@ export function ThemeProvider({ children }) {
   // 3. Crée l'état. On check le localStorage pour voir si l'utilisateur
   //    avait déjà un thème choisi (c'est pro !)
   const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "dark"
+    () => localStorage.getItem("theme") || "dark",
   );
 
   // 4. Une fonction pour basculer le thème
