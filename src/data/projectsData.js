@@ -25,11 +25,12 @@ const projectsData = [
     image: "https://cdn.imgchest.com/files/68480b8950b5.png",
     gallery: [
       "https://cdn.imgchest.com/files/68480b8950b5.png",
-      "https://cdn.imgchest.com/files/k7392l39687.png",
-      "https://cdn.imgchest.com/files/w7w63m23pky.png",
+      "https://cdn.imgchest.com/files/66131bbf11cd.png",
+      "https://cdn.imgchest.com/files/1ef4eff8acb1.png",
+      "https://cdn.imgchest.com/files/94ed3a3fb04b.png",
     ],
-    siteLink: "", // Mettre le lien si dispo
-    githubLink: "https://github.com/dlowic/boole-and-bin", // Mettre le vrai lien
+    siteLink: "https://digbeu.alwaysdata.net/SAE203/",
+    githubLink: "https://github.com/dlowic/SAE_203_Boole_Bin",
   },
   // --- 2. DATA VIZ (SAE 303) ---
   {
