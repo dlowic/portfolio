@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://loicdigbeu.fr/sitemap.xml
