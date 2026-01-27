@@ -38,7 +38,7 @@ function Accueil() {
           </h1>
           <div className="separator"></div>
           <p className="description">
-            Développeur Front-End Junior en formation de{" "}
+            Développeur Full stack Junior en formation de{" "}
             <strong>BUT2 Métiers du Multimédia et de l'Internet</strong> à l'IUT
             de Bobigny (parcours{" "}
             <strong>Développement Web et Dispositifs Interactifs</strong>).
