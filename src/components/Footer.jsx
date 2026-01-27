@@ -36,7 +36,7 @@ function Footer() {
         {/* ZONE DROITE : Icônes */}
         <div className="footer-right">
           <a
-            href="https://github.com/ton-pseudo"
+            href="https://github.com/dlowic"
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub"
@@ -44,16 +44,16 @@ function Footer() {
             <FaGithub />
           </a>
           <a
-            href="https://linkedin.com/in/ton-profil"
+            href="https://www.linkedin.com/in/loic-digbeu-594792347/"
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn"
           >
             <FaLinkedin />
           </a>
-          <a href="mailto:ton-email@gmail.com" aria-label="Email">
+          <Link to="/contact" className="legal-link">
             <FaEnvelope />
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
